@@ -19,7 +19,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    //bring the home controller to the train index page and checks if user is admin
+    //bring the home controller to the fish index page and checks if user is admin
     public function index()
     {
         $user = Auth::user();
@@ -27,11 +27,11 @@ class HomeController extends Controller
 
         if($user->hasRole('admin'))
         {
-            $home = 'admin.trains.index';
+            $home = 'admin.fishs.index';
         }
         else if ($user->hasRole('user'))
         {
-            $home = 'user.trains.index';
+            $home = 'user.fishs.index';
         }
         return redirect()->route($home);
     }

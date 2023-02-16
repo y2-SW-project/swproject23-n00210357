@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(DestinationSeeder::class);
         $this->call(FishSeeder::class);
-        $this->call(CatcherSeeder::class);
+        $this->call(DriverSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 

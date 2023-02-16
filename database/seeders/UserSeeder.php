@@ -15,14 +15,14 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    //runs fishFactory.php when called in terminal
+    //runs trainFactory.php when called in terminal
 
     //when this is run it attempts to use factory to input 10 filler users into the user table of the database
     public function run()
     {
-        $role_admin = Role::where('name', 'angler')->first();
+        $role_admin = Role::where('name', 'admin')->first();
 
-        $role_user = Role::where('name', 'customer')->first();
+        $role_user = Role::where('name', 'user')->first();
 
         $admin = new User();
         $admin->name = 'Tim';

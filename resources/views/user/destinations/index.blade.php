@@ -21,7 +21,7 @@
 
                     <div>
                     <h2>
-                        <a href="{{ route('customer.destinations.show', $destination) }}"> {{$destination->location}}</a>
+                        <a href="{{ route('user.destinations.show', $destination) }}"> {{$destination->location}}</a>
                     </h2>
 
                     <p class="mt-2">

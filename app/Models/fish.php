@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class train extends Model
+class fish extends Model
 {
     //allows the use of factory
     use HasFactory;
@@ -16,25 +16,25 @@ class train extends Model
     //gets key / uuid
     public function getRouteKeyName()
     {
-        //returns the uuid at the top of the page as appose to the trains id
+        //returns the uuid at the top of the page as appose to the fishs id
         return 'uuid';
     }
 
-    //links train to destination as a foreign key
+    //links fish to destination as a foreign key
     public function destination()
     {
         return $this->belongsTo(destination::class);
     }
 
-    //links train to user as a foreign key
+    //links fish to user as a foreign key
     public function user()
     {
         return $this->belongsTo(user::class);
     }
 
-    //links train to catcher as a foreign key
-    public function catcher()
+    //links fish to driver as a foreign key
+    public function driver()
     {
-        return $this->belongsToMany(catcher::class)->withTimestamps();
+        return $this->belongsToMany(driver::class)->withTimestamps();
     }
 }

@@ -81,9 +81,9 @@ class User extends Authenticatable
         return $this->hasMany((destination::class));
     }
 
-    //links user to catcher as a foreign key
-    public function catchers()
+    //links user to driver as a foreign key
+    public function drivers()
     {
-        return $this->hasMany((catcher::class));
+        return $this->hasMany((driver::class));
     }
 }

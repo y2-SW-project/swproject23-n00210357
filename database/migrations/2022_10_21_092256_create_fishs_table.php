@@ -15,7 +15,7 @@ return new class extends Migration
      //creates the table in the database called fishs and it has an id, uuid, user_id, name, cargo, image, cost and destination along with a time stamp of when it was made
     public function up()
     {
-        Schema::create('fishs', function (Blueprint $table) {
+        Schema::create('fish', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();

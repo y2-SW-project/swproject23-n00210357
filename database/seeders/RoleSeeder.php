@@ -19,13 +19,13 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $role_admin = new Role();
-        $role_admin->name = 'angler';
-        $role_admin->description = 'A seller';
+        $role_admin->name = 'admin';
+        $role_admin->description = 'An admininstrator user';
         $role_admin->save();
 
         $role_user = new Role();
-        $role_user->name = 'customer';
-        $role_user->description = 'A customer';
+        $role_user->name = 'user';
+        $role_user->description = 'An ordinary user';
         $role_user->save();
     }
 }
