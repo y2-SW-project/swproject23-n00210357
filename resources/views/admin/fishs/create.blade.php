@@ -34,20 +34,20 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <label for="destination">Destination</label>
-                        <select name="destination_id">
-                        @foreach($destination as $desination)
-                        <option value="{{$desination->id}}" {{(old('destination_id') == $desination->id) ? "selected" : ""}}>
-                            {{$desination->location}}
+                        <label for="basket">Basket</label>
+                        <select name="basket_id">
+                        @foreach($basket as $basket)
+                        <option value="{{$basket->id}}" {{(old('basket_id') == $basket->id) ? "selected" : ""}}>
+                            {{$basket->location}}
                         </option>
                         @endforeach
                         </select>
 
                         <div class="form-group">
-                            <label for="drivers"> <strong> Drivers</strong> <br> </label>
-                            @foreach ($drivers as $drive)
-                            <input type="checkbox", value="{{$drive->id}}" name="drivers[]">
-                            {{$drive->first_name}}
+                            <label for="fisheries"> <strong> Fisheries</strong> <br> </label>
+                            @foreach ($fisheries as $fishery)
+                            <input type="checkbox", value="{{$fishery->id}}" name="fisheries[]">
+                            {{$fishery->first_name}}
 
                             @endforeach
 

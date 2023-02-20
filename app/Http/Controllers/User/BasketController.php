@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\destination;
+use App\Models\basket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class DestinationController extends Controller
+class BasketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,15 +23,15 @@ class DestinationController extends Controller
          $user = Auth::user();
          $user->authorizeRoles('user');
 
-         $destinations = destination::all();
-         //authenticates the destinations to their latest update in pages of 5
-         //$destinations = destination::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+         $baskets = basket::all();
+         //authenticates the baskets to their latest update in pages of 5
+         //$baskets = basket::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-         $destinations = Destination::paginate(10);
+         $baskets = Basket::paginate(10);
 
-         //brings the user to the index page along with the linked in destinations
-         return view('user.destinations.index')->with('destinations', $destinations);
+         //brings the user to the index page along with the linked in baskets
+         return view('user.baskets.index')->with('baskets', $baskets);
      }
 
      /**
@@ -42,16 +42,16 @@ class DestinationController extends Controller
       */
 
       // brings the user to their show page when called
-      public function show(Destination $destination)
+      public function show(Basket $basket)
      {
         $user = Auth::user();
         $user->authorizeRoles('user');
 
-        if ($destination->user_id != Auth::id())
+        if ($basket->user_id != Auth::id())
         {
             return abort(403);
         }
         //opens up the show page for the user
-        return view('user.destinations.show')->with('destination', $destination);
+        return view('user.baskets.show')->with('basket', $basket);
     }
 }

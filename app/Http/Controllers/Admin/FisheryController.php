@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\destination;
-use App\Models\driver;
+use App\Models\baket;
+use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-//controlles the placement of the drivers table/model across the laravel website
-class DriverController extends Controller
+//controlles the placement of the fisheries table/model across the laravel website
+class FisheryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,16 +25,16 @@ class DriverController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $drivers = driver::with('user')->get();
-        $drivers = driver::all();
-        //authenticates the drivers to their latest update in pages of 5
-        //$drivers = driver::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+        $fisheries = fishery::with('user')->get();
+        $fisheries = fishery::all();
+        //authenticates the fisheries to their latest update in pages of 5
+        //$fisheries = fishery::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-        $drivers = Driver::paginate(10);
+        $fisheries = Fishery::paginate(10);
 
-        //brings the user to the index page along with the linked in drivers
-        return view('admin.drivers.index')->with('drivers', $drivers);
+        //brings the user to the index page along with the linked in fisheries
+        return view('admin.fisheries.index')->with('fisheries', $fisheries);
     }
 
      /**
@@ -43,7 +43,7 @@ class DriverController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //when called sends the user to the driverss create page
+     //when called sends the user to the fisheries create page
      public function create()
      {
          $user = Auth::user();
@@ -51,10 +51,10 @@ class DriverController extends Controller
 
          //sends the user to the create page
          $fishs = fish::all();
-         return view('admin.drivers.create')->with('fishs', $fishs);
+         return view('admin.fisheries.create')->with('fishs', $fishs);
      }
 
-     //when called it stores the given data for drivers into the database driver table
+     //when called it stores the given data for fisheries into the database fishery table
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -75,10 +75,10 @@ class DriverController extends Controller
         $extension = $photo->getClientOriginalExtension();
         // the name $namefile needs to be unique, I use title and add the date to guarantee a unique name$namefile, ISBN would be better here.
         $namefile = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $photo->storeAs('public/images/driver', $namefile);
+        $path = $photo->storeAs('public/images/fishery', $namefile);
 
-        //uses the new data to create a new fish in the drive table
-        $driver = Driver::create([
+        //uses the new data to create a new fish in the fishery table
+        $fishery = Fishery::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
             'first_name' => $request->first_name,
@@ -89,8 +89,8 @@ class DriverController extends Controller
         ]);
 
         //brings the user to the index page
-        $driver->fish()->attach($request->fish);
-        return to_route('admin.drivers.index');
+        $fishery->fish()->attach($request->fish);
+        return to_route('admin.fisheries.index');
     }
 
     /**
@@ -101,20 +101,20 @@ class DriverController extends Controller
       */
 
       // brings the user to their show page when called
-      public function show(Driver $driver)
+      public function show(Fishery $fishery)
      {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $drivers = driver::with('fish')->get();
-        //checks that the drivers are the property of the user otheir wise it calls a 403 error
-        if ($driver->user_id != Auth::id())
+        $fisheries = fishery::with('fish')->get();
+        //checks that the fisheries are the property of the user otheir wise it calls a 403 error
+        if ($fishery->user_id != Auth::id())
         {
             return abort(403);
         }
-        $fishs = fish::with('destination')->with('driver')->get();
+        $fishs = fish::with('baket')->with('fishery')->get();
         //opens up the show page for the user
-        return view('admin.drivers.show')->with('driver', $driver);
+        return view('admin.fisheries.show')->with('fishery', $fishery);
     }
 
      /**
@@ -124,20 +124,20 @@ class DriverController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //sends the user the the edit page with their selected driver
-    public function edit(Driver $driver)
+    //sends the user the the edit page with their selected fishery
+    public function edit(Fishery $fishery)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the driver id is not connected to the user preventing another user from opining the edit page on someone elses driver
-        if ($driver->user_id != Auth::id())
+        //call error 403 if the fishery id is not connected to the user preventing another user from opining the edit page on someone elses fishery
+        if ($fishery->user_id != Auth::id())
         {
             return abort(403);
         }
 
-        //opens up the edit page for the user with their selected driver
-        return view('admin.drivers.edit')->with('driver', $driver)->with('success', 'Driver updated');
+        //opens up the edit page for the user with their selected fishery
+        return view('admin.fisheries.edit')->with('fishery', $fishery)->with('success', 'Fishery updated');
     }
 
     /**
@@ -148,14 +148,14 @@ class DriverController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //pulls the update page with the selected drivers data already filled in and prepared to be edited
-    public function update(Request $request, Driver $driver)
+    //pulls the update page with the selected fisheries data already filled in and prepared to be edited
+    public function update(Request $request, Fishery $fishery)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the driver id is not connected to the user preventing another user from editing someone elses driver
-        if ($driver->user_id != Auth::id())
+        //call error 403 if the fishery id is not connected to the user preventing another user from editing someone elses fishery
+        if ($fishery->user_id != Auth::id())
         {
             return abort(403);
         }
@@ -173,10 +173,10 @@ class DriverController extends Controller
         $extension = $photo->getClientOriginalExtension();
         // the name $namefile needs to be unique, I use title and add the date to guarantee a unique name$namefile, ISBN would be better here.
         $namefile = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $photo->storeAs('public/images/driver', $namefile);
+        $path = $photo->storeAs('public/images/fishery', $namefile);
 
-        //updates the selected drivers value to their new values
-        $driver->update([
+        //updates the selected fisheries value to their new values
+        $fishery->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'certification' => $request->certification,
@@ -184,8 +184,8 @@ class DriverController extends Controller
             'salary' => $request->salary
         ]);
 
-        //returns the user to show page and plays the success message Driver updated
-        return to_route('admin.drivers.show', $driver)->with('success', 'Driver updated');
+        //returns the user to show page and plays the success message Fishery updated
+        return to_route('admin.fisheries.show', $fishery)->with('success', 'Fishery updated');
     }
 
      /**
@@ -195,21 +195,21 @@ class DriverController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //when called with a driver id it allows it to be deleted and sends the user back to the users index page
-     public function destroy(Driver $driver)
+     //when called with a fishery id it allows it to be deleted and sends the user back to the users index page
+     public function destroy(Fishery $fishery)
      {
          $user = Auth::user();
          $user->authorizeRoles('admin');
 
-         //call error 403 if the driver id is not connected to the user preventing another user from deleting someone elses driver
-         if ($driver->user_id != Auth::id())
+         //call error 403 if the fishery id is not connected to the user preventing another user from deleting someone elses fishery
+         if ($fishery->user_id != Auth::id())
          {
              return abort(403);
          }
 
-         $driver->delete();
+         $fishery->delete();
 
-         //returns the user to index page and plays the success message Driver deleted
-         return to_route('admin.drivers.index')->with('success', 'Driver deleted');
+         //returns the user to index page and plays the success message Fishery deleted
+         return to_route('admin.fisheries.index')->with('success', 'Fishery deleted');
      }
 }

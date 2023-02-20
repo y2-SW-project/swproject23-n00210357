@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Drivers') }}
+            {{ __('Baskets') }}
         </h2>
     </x-slot>
 
@@ -11,35 +11,35 @@
                 {{session('success')}}
             </x-alert-success>
 
-                @forelse ($drivers as $driver)
+            <a href="{{ route('admin.baskets.create') }}" class="btn-link btn-lg mb-2">+ New Basket</a>
+            @forelse ($baskets as $basket)
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/images/driver/' . $driver->photo)}}" width="200"/>
+                        <img src="{{asset('storage/images/basket/' . $basket->picture)}}" width="200"/>
                     </p>
                     </div>
 
                     <div>
                     <h2>
-                        <a href="{{ route('user.drivers.show', $driver) }}"> {{$driver->first_name}}</a>
+                        <a href="{{ route('admin.baskets.show', $basket) }}"> {{$basket->location}}</a>
                     </h2>
 
                     <p class="mt-2">
-                        {{Str::limit($driver->certification), 200}}
-                    </p>
+                        {{Str::limit($basket->station_master), 200}}
+                     </p>
 
-                    <p class="mt-2">
-                        Owned by {{$driver->user->name}}
+                     <p class="mt-2">
+                        Owned by {{$basket->user->name}}
                     </p>
-
                     </div>
 
-                    <span class="block mt-4 text-sm opacity-70"> {{$driver->updated_at->diffForHumans()}}</span>
+                    <span class="block mt-4 text-sm opacity-70"> {{$basket->updated_at->diffForHumans()}}</span>
                 </div>
                 @empty
-                <p>You have no drivers</p>
+                <p>You have no baskets</p>
                 @endforelse
-                {{$drivers->links()}}
+                {{$baskets->links()}}
             </div>
         </div>
 </x-app-layout>

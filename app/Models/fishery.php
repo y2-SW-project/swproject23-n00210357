@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class driver extends Model
+class fishery extends Model
 {
     use HasFactory;
 
@@ -19,13 +19,13 @@ class driver extends Model
         return 'uuid';
     }
 
-    //links driver to fishs as a foreign key
+    //links fishery to fishs as a foreign key
     public function fish()
     {
         return $this->belongsToMany(fish::class)->withTimestamps();
     }
 
-    //links driver to user as a foreign key
+    //links fishery to user as a foreign key
     public function user()
     {
         return $this->belongsTo(user::class);

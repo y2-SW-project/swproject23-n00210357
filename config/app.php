@@ -127,19 +127,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Maintenance Mode Driver
+    | Maintenance Mode Drive
     |--------------------------------------------------------------------------
     |
-    | These configuration options determine the driver used to determine and
-    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | These configuration options determine the drive used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" drive will
     | allow maintenance mode to be controlled across multiple machines.
     |
-    | Supported drivers: "file", "cache"
+    | Supported drives: "file", "cache"
     |
     */
 
     'maintenance' => [
-        'driver' => 'file',
+        'drive' => 'file',
         // 'store'  => 'redis',
     ],
 

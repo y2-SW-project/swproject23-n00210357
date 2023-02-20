@@ -25,4 +25,9 @@
         @apply bg-red-600 hover:bg-red-700
         active:bg-red-700 ring-red-300;
     }
+
+    .twist
+    {
+        transform: rotate(90deg);
+    }
 }

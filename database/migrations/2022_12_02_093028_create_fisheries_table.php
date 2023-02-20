@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('destinations', function (Blueprint $table) {
+        Schema::create('fisheries', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
-            $table->string('location');
-            $table->string('station_master');
-            $table->string('picture');
-            $table->boolean('has_dock');
-            $table->boolean('has_airport');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('certification');
+            $table->string('photo');
+            $table->decimal('salary');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destinations');
+        Schema::dropIfExists('fisheries');
     }
 };

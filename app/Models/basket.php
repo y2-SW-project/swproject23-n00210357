@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class destination extends Model
+class basket extends Model
 {
     use HasFactory;
 
@@ -19,13 +19,13 @@ class destination extends Model
         return 'uuid';
     }
 
-    //links destination to fishs as a foreign key
+    //links baskit to fishs as a foreign key
     public function fishs()
     {
         return $this->hasMany((fish::class));
     }
 
-    //links destination to user as a foreign key
+    //links baskit to user as a foreign key
     public function user()
     {
         return $this->belongsTo(user::class);

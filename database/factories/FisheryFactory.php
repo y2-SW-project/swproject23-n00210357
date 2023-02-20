@@ -4,11 +4,11 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-
+use App\Models\fishery;
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\destination>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fishery>
  */
-class DestinationFactory extends Factory
+class FisheryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,11 +21,11 @@ class DestinationFactory extends Factory
         return [
             'uuid' => Str::uuid(),
             'user_id' => $this->faker->randomElement([1, 2]),
-            'location' => $this->faker->text,
-            'station_master' => $this->faker->name,
-            'picture' => $this->faker->randomElement(['D1.jpg', 'D2.jpg', 'D3.jpg']),
-            'has_dock' => $this->faker->randomElement([0, 1]),
-            'has_airport' => $this->faker->randomElement([0, 1]),
+            'first_name' => $this->faker->name(),
+            'last_name' => $this->faker->name(),
+            'certification' => $this->faker->text(),
+            'photo' => $this->faker->randomElement(['P1.jpg', 'P2.jpg', 'P3.jpg']),
+            'salary' => $this->faker->randomFloat(2, 0, 500),
         ];
     }
 }

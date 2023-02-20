@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('driver_fish', function (Blueprint $table) {
+        Schema::create('baskets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fish_id');
-            $table->unsignedBigInteger('driver_id');
-
-            $table->foreign('fish_id')->references('id')->on('fish')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('driver_id')->references('id')->on('drivers')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('uuid');
+            $table->foreignId('user_id')->constrained();
+            $table->string('location');
+            $table->string('station_master');
+            $table->string('picture');
+            $table->boolean('has_dock');
+            $table->boolean('has_airport');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('driver_fish');
+        Schema::dropIfExists('baskets');
     }
 };

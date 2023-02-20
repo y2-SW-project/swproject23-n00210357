@@ -36,36 +36,36 @@ class HomeController extends Controller
         return redirect()->route($home);
     }
 
-    //bring the home controller to the destination index page and checks if user is admin
-    public function destinationIndex(Request $request)
+    //bring the home controller to the basket index page and checks if user is admin
+    public function basketIndex(Request $request)
     {
         $user = Auth::user();
         $home = 'home';
 
         if($user->hasRole('admin'))
         {
-            $home = 'admin.destinations.index';
+            $home = 'admin.baskets.index';
         }
         else if ($user->hasRole('user'))
         {
-            $home = 'user.destinations.index';
+            $home = 'user.baskets.index';
         }
         return redirect()->route($home);
     }
 
-    //bring the home controller to the driver index page and checks if user is admin
-    public function driverIndex(Request $request)
+    //bring the home controller to the fishery index page and checks if user is admin
+    public function fisheryIndex(Request $request)
     {
         $user = Auth::user();
         $home = 'home';
 
         if($user->hasRole('admin'))
         {
-            $home = 'admin.drivers.index';
+            $home = 'admin.fisheries.index';
         }
         else if ($user->hasRole('user'))
         {
-            $home = 'user.drivers.index';
+            $home = 'user.fisheries.index';
         }
         return redirect()->route($home);
     }

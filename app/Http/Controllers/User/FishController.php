@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\destination;
-use App\Models\driver;
+use App\Models\basket;
+use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +49,7 @@ class FishController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('user');
 
-        $fishs = fish::with('destination')->with('driver')->get();
+        $fishs = fish::with('basket')->with('fishery')->get();
         //checks that the fishs are the property of the user otheir wise it calls a 403 error
         if ($fish->user_id != Auth::id())
         {

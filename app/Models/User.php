@@ -75,15 +75,15 @@ class User extends Authenticatable
         return $this->hasMany((fish::class));
     }
 
-    //links user to destination as a foreign key
-    public function destinations()
+    //links user to basket as a foreign key
+    public function basket()
     {
-        return $this->hasMany((destination::class));
+        return $this->hasMany((basket::class));
     }
 
-    //links user to driver as a foreign key
-    public function drivers()
+    //links user to fishery as a foreign key
+    public function fisheries()
     {
-        return $this->hasMany((driver::class));
+        return $this->hasMany((fishery::class));
     }
 }

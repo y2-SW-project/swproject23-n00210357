@@ -46,21 +46,21 @@
                         <div class="p-6"></div>
 
                              <h2>
-                                Destination
+                                Basket
                              </h2>
 
                              <div class="flex">
                              <div>
-                                <img src="{{asset('storage/images/destination/' . $fish->destination->picture)}}" width="200"/>
+                                <img src="{{asset('storage/images/basket/' . $fish->basket->picture)}}" width="200"/>
                              </div>
 
                              <div>
                              <p>
-                                {{$fish->destination->location}}
+                                {{$fish->basket->location}}
                              </p>
 
                              <p class="">
-                                Station Master {{$fish->destination->station_master}}
+                                Station Master {{$fish->basket->station_master}}
                              </p>
                              </div>
                              </div>
@@ -68,11 +68,11 @@
                              <div class="p-6"></div>
 
                         <div>
-                            @foreach ($fish->driver as $driver)
+                            @foreach ($fish->fishery as $fishery)
                             <tr>
-                                <td class="font-bold">Driver</td>
-                                <td> {{$driver->first_name}} </td>
-                                <td> {{$driver->last_name}} </td>
+                                <td class="font-bold">Fishery</td>
+                                <td> {{$fishery->first_name}} </td>
+                                <td> {{$fishery->last_name}} </td>
                             </tr>
                             @endforeach
                         </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot location="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Destinations') }}
+            {{ __('Fisheries') }}
         </h2>
     </x-slot>
 
@@ -13,11 +13,11 @@
 
             <div class ="flex">
                 <p class="opacity-70">
-                    <strong>Created: </strong> {{$destination->created_at->diffForHumans()}}
+                    <strong>Created: </strong> {{$fishery->created_at->diffForHumans()}}
                 </p>
 
                 <p class="opacity-70 ml-8">
-                    <strong>Updated at: </strong> {{$destination->updated_at->diffForHumans()}}
+                    <strong>Updated at: </strong> {{$fishery->updated_at->diffForHumans()}}
                 </p>
 
                 </div>
@@ -26,25 +26,26 @@
 
                         <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
                             <h2>
-                             The Destination is {{$destination->location}}
+                                 The Fishery is
+                            </h2>
+
+                            <h2>
+                                {{$fishery->first_name}}
+                                {{$fishery->last_name}}
                             </h2>
 
                             <div class="flex">
                             <p>
-                                <img src="{{asset('storage/images/destination/' . $destination->picture)}}" width="200"/>
+                                <img src="{{asset('storage/images/fishery/' . $fishery->photo)}}" width="200"/>
                             </p>
 
                             <div>
                             <p>
-                               The station master consists of {{$destination->station_master}}
+                               Their certification is {{$fishery->certification}}
                             </p>
 
                              <p>
-                                Checked for dock {{$destination->has_dock}}
-                             </p>
-
-                             <p>
-                                Checked for airport {{$destination->has_airport}}
+                                They are paid €{{$fishery->salary}} yearly
                              </p>
                             </div>
                             </div>

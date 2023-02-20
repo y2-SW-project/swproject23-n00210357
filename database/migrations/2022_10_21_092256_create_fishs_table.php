@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
 
-     //creates the table in the database called fishs and it has an id, uuid, user_id, name, cargo, image, cost and destination along with a time stamp of when it was made
+     //creates the table in the database called fishs and it has an id, uuid, user_id, name, cargo, image, cost and basket along with a time stamp of when it was made
     public function up()
     {
         Schema::create('fish', function (Blueprint $table) {
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('cargo');
             $table->string('image');
             $table->decimal('cost');
-            //$table->foreignId('destination_id')->constrained();
+            //$table->foreignId('basket_id')->constrained();
             $table->timestamps();
         });
     }

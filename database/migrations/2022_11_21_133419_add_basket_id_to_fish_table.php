@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('fish', function (Blueprint $table) {
-            $table->unsignedBigInteger('destination_id');
-            $table->foreign('destination_id')->references('id')->on('destinations')->onUpdate('cascade')->onDelete('restrict');
+            $table->unsignedBigInteger('basket_id');
+            $table->foreign('basket_id')->references('id')->on('baskets')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
@@ -28,8 +28,8 @@ return new class extends Migration
     {
         Schema::table('fish', function (Blueprint $table)
         {
-            $table->dropForeign(['destination_id']);
-            $table->dropColumn('destination_id');
+            $table->dropForeign(['basket_id']);
+            $table->dropColumn('basket_id');
         });
     }
 };

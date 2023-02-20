@@ -26,7 +26,7 @@ class fishFactory extends Factory
     cargo uses faker text giving it some random text
     image is hard coded with the image names and randomize between the three
     cost uses faker random float 2 which is meant to fill it with a random float with up to point two digits but it usally comes up with an out of cost bounds error that stops the seeding process but still fills in the prevously valid ones
-    destination uses faker random digit not 2 which makes it a random single digit number (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    basket uses faker random digit not 2 which makes it a random single digit number (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
     */
     public function definition()
     {
@@ -36,9 +36,9 @@ class fishFactory extends Factory
             'user_id' => $this->faker->randomElement([1, 2]),
             'name' => $this->faker->name(),
             'cargo' => $this->faker->text(),
-            'image' => $this->faker->randomElement(['T1.jpg', 'T2.jpg', 'T3.jpg']),
+            'image' => $this->faker->randomElement(['F1.jpg', 'F2.jpg', 'F3.jpg']),
             'cost' => $this->faker->randomFloat(2, 0, 500),
-            'destination_id' => $this->faker->randomElement([1, 2, 3]),
+            'basket_id' => $this->faker->randomElement([1, 2, 3]),
         ];
     }
 

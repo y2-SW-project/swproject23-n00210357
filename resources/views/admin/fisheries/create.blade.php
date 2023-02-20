@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Driver') }}
+            {{ __('Fishery') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('admin.drivers.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.fisheries.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <x-input name="first_name" rows="10" placeholder="Start typing" class="w-full mt-6"></x-input>
@@ -48,7 +48,7 @@
                             @endforeach
                         </div>
 
-                        <button class="my-6"> Save Driver</button>
+                        <button class="my-6"> Save Fishery</button>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Destination') }}
+            {{ __('Basket') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('admin.destinations.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.baskets.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <x-input type="text" name="location" placeholder="Title" class="w-full" autocomplete="off"></x-input>
@@ -35,7 +35,7 @@
                         <input type="hidden" name="has_airport" value="0"/>
                         <x-input type="checkbox" name="has_airport" placeholder="0 = false 1 = true" class="w-full" autocomplete="off" value=1></x-input>
 
-                        <button class="my-6"> Save Destination</button>
+                        <button class="my-6"> Save Basket</button>
                     </form>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 <?php
 use App\Http\Controllers\Admin\FishController as AdminFishController;
 use App\Http\Controllers\User\FishController as UserFishController;
-use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
-use App\Http\Controllers\User\DestinationController as UserDestinationController;
-use App\Http\Controllers\Admin\DriverController as AdminDriverController;
-use App\Http\Controllers\User\DriverController as UserDriverController;
-use App\Models\destination;
+use App\Http\Controllers\Admin\BasketController as AdminBasketController;
+use App\Http\Controllers\User\BasketController as UserbasketnController;
+use App\Http\Controllers\Admin\FisheryController as AdminFisheryController;
+use App\Http\Controllers\User\FisheryController as UserFisheryController;
+use App\Models\basket;
 use Database\Seeders\FishSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +34,8 @@ Route::get('/dashboard', function ()
 require __DIR__.'/auth.php';
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-Route::get('/home/destinations', [App\Http\Controllers\HomeController::class, 'destinationIndex'])->name('home.destination.index');
-Route::get('/home/drivers', [App\Http\Controllers\HomeController::class, 'driverIndex'])->name('home.driver.index');
+Route::get('/home/baskets', [App\Http\Controllers\HomeController::class, 'basketIndex'])->name('home.basket.index');
+Route::get('/home/fisheries', [App\Http\Controllers\HomeController::class, 'fisheryIndex'])->name('home.fishery.index');
 
 //moves the user to with help of the train controller through the website if they are and admin
 Route::resource('/admin/fishs', AdminFishController::class)->middleware(['auth'])->names('admin.fishs');
@@ -43,14 +43,14 @@ Route::resource('/admin/fishs', AdminFishController::class)->middleware(['auth']
 //moves the user to with help of the train controller through the website if they are and user and restricts them the the index and show pages
 Route::resource('/user/fishs', UserFishController::class)->middleware(['auth'])->names('user.fishs')->only(['index', 'show']);
 
-//moves the user to with help of the destination controller through the website if they are and admin
-Route::resource('/admin/destinations', AdminDestinationController::class)->middleware(['auth'])->names('admin.destinations');
+//moves the user to with help of the basket controller through the website if they are and admin
+Route::resource('/admin/baskets', AdminBasketController::class)->middleware(['auth'])->names('admin.baskets');
 
-//moves the user to with help of the destination controller through the website if they are and user and restricts them the the index and show pages
-Route::resource('/user/destinations', UserDestinationController::class)->middleware(['auth'])->names('user.destinations')->only(['index', 'show']);
+//moves the user to with help of the basket controller through the website if they are and user and restricts them the the index and show pages
+Route::resource('/user/baskets', UserbasketnController::class)->middleware(['auth'])->names('user.baskets')->only(['index', 'show']);
 
-//moves the user to with help of the driver controller through the website if they are and admin
-Route::resource('/admin/drivers', AdminDriverController::class)->middleware(['auth'])->names('admin.drivers');
+//moves the user to with help of the fishery controller through the website if they are and admin
+Route::resource('/admin/fisheries', AdminFisheryController::class)->middleware(['auth'])->names('admin.fisheries');
 
-//moves the user to with help of the driver controller through the website if they are and user and restricts them the the index and show pages
-Route::resource('/user/drivers', UserDriverController::class)->middleware(['auth'])->names('user.drivers')->only(['index', 'show']);
+//moves the user to with help of the fishery controller through the website if they are and user and restricts them the the index and show pages
+Route::resource('/user/fisheries', UserFisheryController::class)->middleware(['auth'])->names('user.fisheries')->only(['index', 'show']);

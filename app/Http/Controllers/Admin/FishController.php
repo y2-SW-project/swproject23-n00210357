@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\destination;
-use App\Models\driver;
+use App\Models\basket;
+use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +49,9 @@ class FishController extends Controller
         $user->authorizeRoles('admin');
 
         //sends the user to the create page
-        $destination = destination::all();
-        $drivers = driver::all();
-        return view('admin.fishs.create')->with('destination', $destination)->with('drivers', $drivers);
+        $basket = basket::all();
+        $fisheries = fishery::all();
+        return view('admin.fishs.create')->with('basket', $basket)->with('fisheries', $fisheries);
     }
 
     /**
@@ -74,8 +74,8 @@ class FishController extends Controller
             //'image' => 'required',
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'destination_id' => 'required|integer',
-            'drivers' =>['required' , 'exists:drivers,id']
+            'basketn_id' => 'required|integer',
+            'fisheries' =>['required' , 'exists:fisheries,id']
         ]);
 
         $image = $request->file('image');
@@ -92,13 +92,13 @@ class FishController extends Controller
             'cargo' => $request->cargo,
             'image' => $filename,
             'cost' => $request->cost,
-            'destination_id' => $request->destination_id
+            'basketn_id' => $request->basketn_id
         ]);
 
         //brings the user to the index page
-        $destination = destination::all();
-        $fish->driver()->attach($request->drivers);
-        return to_route('admin.fishs.index')->with('destination',$destination);
+        $basket = basket::all();
+        $fish->fishery()->attach($request->fisheries);
+        return to_route('admin.fishs.index')->with('basket',$basket);
     }
 
     /**
@@ -114,7 +114,7 @@ class FishController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $fishs = fish::with('destination')->with('driver')->get();
+        $fishs = fish::with('basket')->with('fishery')->get();
         //checks that the fishs are the property of the user otheir wise it calls a 403 error
         if ($fish->user_id != Auth::id())
         {
@@ -145,8 +145,8 @@ class FishController extends Controller
         }
 
         //opens up the edit page for the user with their selected fish
-        $destination = destination::all();
-        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('destination',$destination);
+        $basket = basket::all();
+        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('basket',$basket);
     }
 
     /**
@@ -175,7 +175,7 @@ class FishController extends Controller
             'cargo' => 'required',
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'destination_id' => 'required|integer',
+            'basketn_id' => 'required|integer',
         ]);
 
         $image = $request->file('image');
@@ -190,12 +190,12 @@ class FishController extends Controller
             'cargo' => $request->cargo,
             'image' => $filename,
             'cost' => $request->cost,
-            'destination_id' => $request->destination_id
+            'basketn_id' => $request->basketn_id
         ]);
 
         //returns the user to show page and plays the success message Fish updated
-        $destination = destination::all();
-        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('destination',$destination);
+        $basket = basket::all();
+        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('basket',$basket);
     }
 
     /**

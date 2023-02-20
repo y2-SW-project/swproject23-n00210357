@@ -22,11 +22,11 @@
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $fish->cost)"></x-input>
 
-                        <label for="destination">Destination</label>
-                        <select name="destination_id">
-                        @foreach($destination as $desination)
-                        <option value="{{$desination->id}}" {{(old('destination_id') == $desination->id) ? "selected" : ""}}>
-                            {{$desination->location}}
+                        <label for="basket">Basket</label>
+                        <select name="basket_id">
+                        @foreach($basket as $basket)
+                        <option value="{{$basket->id}}" {{(old('basket_id') == $basket->id) ? "selected" : ""}}>
+                            {{$basket->location}}
                         </option>
                         @endforeach
                         </select>

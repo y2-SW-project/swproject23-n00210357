@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\destination;
+use App\Models\basket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class DestinationController extends Controller
+class BasketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,15 +23,15 @@ class DestinationController extends Controller
          $user = Auth::user();
          $user->authorizeRoles('admin');
 
-         $destinations = destination::all();
-         //authenticates the destinations to their latest update in pages of 5
-         //$destinations = destination::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
+         $baskets = basket::all();
+         //authenticates the baskets to their latest update in pages of 5
+         //$baskets = basket::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-         $destinations = Destination::paginate(10);
+         $baskets = Basket::paginate(10);
 
-         //brings the user to the index page along with the linked in destinations
-         return view('admin.destinations.index')->with('destinations', $destinations);
+         //brings the user to the index page along with the linked in baskets
+         return view('admin.baskets.index')->with('baskets', $baskets);
      }
 
      /**
@@ -40,16 +40,16 @@ class DestinationController extends Controller
       * @return \Illuminate\Http\Response
       */
 
-      //when called sends the user to the destinations create page
+      //when called sends the user to the baskets create page
      public function create()
      {
          $user = Auth::user();
          $user->authorizeRoles('admin');
 
          //sends the user to the create page
-         $destination = destination::all();
+         $basket = basket::all();
 
-         return view('admin.destinations.create')->with('destination', $destination);
+         return view('admin.baskets.create')->with('basket', $basket);
      }
 
      /**
@@ -59,7 +59,7 @@ class DestinationController extends Controller
       * @return \Illuminate\Http\Response
       */
 
- //when called it stores the given data for destinations into the database destination table
+ //when called it stores the given data for baskets into the database basket table
  public function store(Request $request)
  {
      $user = Auth::user();
@@ -79,10 +79,10 @@ class DestinationController extends Controller
      $extension = $picture->getClientOriginalExtension();
      // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
      $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-     $path = $picture->storeAs('public/images/destination', $filnam);
+     $path = $picture->storeAs('public/images/basket', $filnam);
 
      //uses the new data to create a new fish in the fish table
-     Destination::create([
+     Basket::create([
          'uuid' => Str::uuid(),
          'user_id' => Auth::id(),
          'location' => $request->location,
@@ -93,8 +93,8 @@ class DestinationController extends Controller
      ]);
 
      //brings the user to the index page
-     $destination = destination::all();
-     return to_route('admin.destinations.index')->with('destination',$destination);
+     $basket = basket::all();
+     return to_route('admin.baskets.index')->with('basket',$basket);
  }
 
      /**
@@ -105,17 +105,17 @@ class DestinationController extends Controller
       */
 
       // brings the user to their show page when called
-      public function show(Destination $destination)
+      public function show(Basket $basket)
      {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        if ($destination->user_id != Auth::id())
+        if ($basket->user_id != Auth::id())
         {
             return abort(403);
         }
         //opens up the show page for the user
-        return view('admin.destinations.show')->with('destination', $destination);
+        return view('admin.baskets.show')->with('basket', $basket);
     }
 
        /**
@@ -125,30 +125,30 @@ class DestinationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //sends the user the the edit page with their selected destination
-    public function edit(Destination $destination)
+    //sends the user the the edit page with their selected basket
+    public function edit(Basket $basket)
     {
-        if ($destination->user_id != Auth::id())
+        if ($basket->user_id != Auth::id())
         {
             return abort(403);
         }
 
-        return view('admin.destinations.edit')->with('destination', $destination);
+        return view('admin.baskets.edit')->with('basket', $basket);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Request  $request
-     * @param  \App\Models\destination  $destination
+     * @param  \App\Models\basket  $basket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destination $destination)
+    public function update(Request $request, Basket $basket)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-        
-        if ($destination->user_id != Auth::id())
+
+        if ($basket->user_id != Auth::id())
         {
             return abort(403);
         }
@@ -168,9 +168,9 @@ class DestinationController extends Controller
      $extension = $picture->getClientOriginalExtension();
      // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
      $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-     $path = $picture->storeAs('public/images/destination', $filnam);
+     $path = $picture->storeAs('public/images/basket', $filnam);
 
-        $destination->update([
+        $basket->update([
             'location' => $request->location,
             'station_master' => $request->station_master,
             'picture' => $filnam,
@@ -178,7 +178,7 @@ class DestinationController extends Controller
             'has_airport' => $request->has_airport,
         ]);
 
-        return to_route('admin.destinations.show', $destination)->with('success','Destination updated successfully');
+        return to_route('admin.baskets.show', $basket)->with('success','Basket updated successfully');
     }
 
     /**
@@ -188,21 +188,21 @@ class DestinationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-      //when called with a destination id it allows it to be deleted and sends the user back to the users index page
-     public function destroy(Destination $destination)
+      //when called with a basket id it allows it to be deleted and sends the user back to the users index page
+     public function destroy(Basket $basket)
      {
          $user = Auth::user();
          $user->authorizeRoles('admin');
 
-         //call error 403 if the destination id is not connected to the user preventing another user from deleting someone elses destination
-         if ($destination->user_id != Auth::id())
+         //call error 403 if the basket id is not connected to the user preventing another user from deleting someone elses basket
+         if ($basket->user_id != Auth::id())
          {
              return abort(403);
          }
 
-         $destination->delete();
+         $basket->delete();
 
-         //returns the user to index page and plays the success message Destination deleted
-         return to_route('admin.destinations.index')->with('success', 'Destination deleted');
+         //returns the user to index page and plays the success message Basket deleted
+         return to_route('admin.baskets.index')->with('success', 'Basket deleted');
      }
 }
