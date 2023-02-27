@@ -74,7 +74,7 @@ class FishController extends Controller
             //'image' => 'required',
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'basketn_id' => 'required|integer',
+            'basket_id' => 'required|integer',
             'fisheries' =>['required' , 'exists:fisheries,id']
         ]);
 
@@ -92,7 +92,7 @@ class FishController extends Controller
             'cargo' => $request->cargo,
             'image' => $filename,
             'cost' => $request->cost,
-            'basketn_id' => $request->basketn_id
+            'basket_id' => $request->basket_id
         ]);
 
         //brings the user to the index page
@@ -175,7 +175,7 @@ class FishController extends Controller
             'cargo' => 'required',
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'basketn_id' => 'required|integer',
+            'basket_id' => 'required|integer',
         ]);
 
         $image = $request->file('image');
@@ -190,7 +190,7 @@ class FishController extends Controller
             'cargo' => $request->cargo,
             'image' => $filename,
             'cost' => $request->cost,
-            'basketn_id' => $request->basketn_id
+            'basket_id' => $request->basket_id
         ]);
 
         //returns the user to show page and plays the success message Fish updated

@@ -2,7 +2,7 @@
 use App\Http\Controllers\Admin\FishController as AdminFishController;
 use App\Http\Controllers\User\FishController as UserFishController;
 use App\Http\Controllers\Admin\BasketController as AdminBasketController;
-use App\Http\Controllers\User\BasketController as UserbasketnController;
+use App\Http\Controllers\User\BasketController as UserbasketController;
 use App\Http\Controllers\Admin\FisheryController as AdminFisheryController;
 use App\Http\Controllers\User\FisheryController as UserFisheryController;
 use App\Models\basket;
@@ -47,7 +47,7 @@ Route::resource('/user/fishs', UserFishController::class)->middleware(['auth'])-
 Route::resource('/admin/baskets', AdminBasketController::class)->middleware(['auth'])->names('admin.baskets');
 
 //moves the user to with help of the basket controller through the website if they are and user and restricts them the the index and show pages
-Route::resource('/user/baskets', UserbasketnController::class)->middleware(['auth'])->names('user.baskets')->only(['index', 'show']);
+Route::resource('/user/baskets', UserbasketController::class)->middleware(['auth'])->names('user.baskets')->only(['index', 'show']);
 
 //moves the user to with help of the fishery controller through the website if they are and admin
 Route::resource('/admin/fisheries', AdminFisheryController::class)->middleware(['auth'])->names('admin.fisheries');
