@@ -4,6 +4,33 @@
 
 @layer components
 {
+    .size2
+    {
+        font-size: 24;
+        font-weight: bold;
+    }
+
+    .lightBorder
+    {
+        border: #696969;
+    }
+
+    .colours
+    {
+        color: #00FFE0;
+        border: #4E4E4E;
+    }
+
+    .colours:hover
+    {
+        color: #0085FF;
+    }
+
+    .colours:active
+    {
+        color: #0029FF;
+    }
+
     .btn-link
     {
         @apply inline-block px-4 py-2 bg-pink-300 rounded-md font-bold text-sm text-white uppercase tracking-widest hover:bg-red-500

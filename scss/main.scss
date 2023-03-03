@@ -9,6 +9,7 @@ $enable-gradient: true;
 
 $success: rgb(172, 0, 143);
 $primary: rgb(0, 0, 0);
+$danger: rgb(5, 123, 34);
 
 $font-family-base: "Roboto Mono";
 
@@ -40,6 +41,9 @@ $custom-color:
 );
 
 $theme-colors: map-merge($theme-colors, $custom-color);
-$theme-colors: map-remove($theme-colors, "danger", "warning", "success", "info");
+//$theme-colors: map-remove($theme-colors, "danger", "warning", "success", "info");
+
+$btn-link-color:             rgb(#000000);
+$btn-link-hover-color:        rgb(#005430);
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
