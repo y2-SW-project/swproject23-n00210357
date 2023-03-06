@@ -4,10 +4,22 @@
 
 @layer components
 {
+    .size1
+    {
+        font-size: 32;
+        font-weight: bold;
+    }
+
     .size2
     {
         font-size: 24;
         font-weight: bold;
+    }
+
+    .size3
+    {
+        font-size: 20;
+        font-weight: normal;
     }
 
     .lightBorder
@@ -47,9 +59,40 @@
         background-color: #0029FF;
     }
 
+    .pale
+    {
+        color: #ffffff;
+        margin-left: 13px;
+        margin-right: 13px;
+    }
+
+    .shadowed
+    {
+        background-color: #2E2E2E;
+        padding-block: 20px;
+    }
+
+    .blackBox
+    {
+        background-color: #4E4E4E;
+        min-height: 220px;
+    }
+
     .centerer
     {
         text-align: center;
+    }
+
+    .righter
+    {
+        text-align: right;
+    }
+
+    .evenOut
+    {
+        vertical-align:middle;
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
     }
 
     .dropdown
