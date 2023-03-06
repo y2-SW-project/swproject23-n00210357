@@ -27,7 +27,7 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-file-input type="file" name="photo" placeholder="Train" class="w-full mt-6" field="image"></x-file-input>
+                        <x-file-input type="file" name="photo" placeholder="Fish" class="w-full mt-6" field="image"></x-file-input>
 
                         <x-input type="number" name="salary" placeholder="yearly salary" class="w-full" autocomplete="off"></x-input>
                         @error('salary')
@@ -35,10 +35,10 @@
                         @enderror
 
                         <div class="form-group">
-                            <label for="train"> <strong> Trains</strong> <br> </label>
-                            @foreach ($trains as $train)
-                            <input type="checkbox", value="{{$train->id}}" name="train[]">
-                            {{$train->name}}
+                            <label for="fish"> <strong> Fishes</strong> <br> </label>
+                            @foreach ($fishes as $fish)
+                            <input type="checkbox", value="{{$fish->id}}" name="fish[]">
+                            {{$fish->name}}
 
                             @endforeach
                         </div>

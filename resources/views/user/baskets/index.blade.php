@@ -10,7 +10,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/images/basket/' . $basket->picture)}}" width="200"/>
+                        <img src="{{asset('storage/app/public/images/basket/' . $basket->picture)}}" width="200"/>
                     </p>
                     </div>
 

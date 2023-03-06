@@ -13,7 +13,7 @@ class RoleSeeder extends Seeder
      *
      * @return void
      */
-    //runs trainFactory.php when called in terminal
+    //runs roleFactory.php when called in terminal
 
     //when this is run it attempts to use factory to input 10 filler roles into the role table of the database
     public function run()

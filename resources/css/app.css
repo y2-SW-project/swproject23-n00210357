@@ -1,33 +1,93 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components
 {
-    .btn-link
+    .size2
     {
-        @apply inline-block px-4 py-2 bg-pink-300 rounded-md font-bold text-sm text-white uppercase tracking-widest hover:bg-red-500
-        active:bg-red-900 focus:ring ring-cyan-300;
+        font-size: 24;
+        font-weight: bold;
     }
 
-    .btn-lg
+    .lightBorder
     {
-        @apply px-6 py-3;
+        border: #696969;
     }
 
-    .btn
+    .colours
     {
-        @apply px-4 py-2 rounded-md font-bold text-sm text-white uppercase tracking-widest focus:ring focus:outline-none;
+        color: #00FFE0;
+        border: #4E4E4E;
     }
 
-    .btn-danger
+    .colours:hover
     {
-        @apply bg-red-600 hover:bg-red-700
-        active:bg-red-700 ring-red-300;
+        color: #0085FF;
+    }
+
+    .colours:active
+    {
+        color: #0029FF;
+    }
+
+    .colours-bg
+    {
+        background-color: #00FFE0;
+        border: #4E4E4E;
+    }
+
+    .colours-bg:hover
+    {
+        background-color: #0085FF;
+    }
+
+    .colours-bg:active
+    {
+        background-color: #0029FF;
+    }
+
+    .centerer
+    {
+        text-align: center;
+    }
+
+    .dropdown
+    {
+        position: relative;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .dropdown-content
+    {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .dropbtn
+    {
+        padding-left: 50px;
+        padding-right: 50px;
+        border: 2px solid #4E4E4E;
+        border-radius: 15px;
+    }
+
+    .dropdown-content a
+    {
+        color: black;
+        display: block;
+    }
+
+    .dropdown:hover .dropdown-content
+    {
+        display: block;
     }
 
     .twist
     {
         transform: rotate(90deg);
     }
-} */
+}

@@ -33,7 +33,7 @@
 
                             <div class="flex">
                             <p>
-                                <img src="{{asset('storage/images/basket/' . $basket->picture)}}" width="200"/>
+                                <img src="{{asset('storage/app/public/images/basket/' . $basket->picture)}}" width="200"/>
                             </p>
 
                             <div>

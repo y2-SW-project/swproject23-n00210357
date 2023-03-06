@@ -37,10 +37,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/home/baskets', [App\Http\Controllers\HomeController::class, 'basketIndex'])->name('home.basket.index');
 Route::get('/home/fisheries', [App\Http\Controllers\HomeController::class, 'fisheryIndex'])->name('home.fishery.index');
 
-//moves the user to with help of the train controller through the website if they are and admin
+//moves the user to with help of the fish controller through the website if they are and admin
 Route::resource('/admin/fishs', AdminFishController::class)->middleware(['auth'])->names('admin.fishs');
 
-//moves the user to with help of the train controller through the website if they are and user and restricts them the the index and show pages
+//moves the user to with help of the fish controller through the website if they are and user and restricts them the the index and show pages
 Route::resource('/user/fishs', UserFishController::class)->middleware(['auth'])->names('user.fishs')->only(['index', 'show']);
 
 //moves the user to with help of the basket controller through the website if they are and admin

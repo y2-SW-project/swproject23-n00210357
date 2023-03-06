@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/images/fishery/' . $fishery->photo)}}" width="200"/>
+                        <img src="{{asset('storage/app/public/images/fishery/' . $fishery->photo)}}" width="200"/>
                     </p>
                     </div>
 

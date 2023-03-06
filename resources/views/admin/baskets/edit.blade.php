@@ -1,4 +1,5 @@
 <x-app-layout>
+
         <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -13,7 +14,7 @@
 
                         <x-input type="text" name="station_master" placeholder="Start typing" class="w-full mt-6" value="{{@old('station_master', $basket->station_master)}}"></x-input>
 
-                        <x-file-input type="file" name="picture" placeholder="Train" class="w-full mt-6" field="image" value="{{@old('picture', $basket->picture)}}"></x-file-input>
+                        <x-file-input type="file" name="picture" placeholder="Basket" class="w-full mt-6" field="image" value="{{@old('picture', $basket->picture)}}"></x-file-input>
 
                         <input type="hidden" name="has_dock" value="0"/>
                         <x-input type="checkbox" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="on" value=1></x-input>
