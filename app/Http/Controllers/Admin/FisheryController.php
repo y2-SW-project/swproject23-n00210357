@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\baket;
+use App\Models\basket;
 use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
@@ -112,7 +112,7 @@ class FisheryController extends Controller
         {
             return abort(403);
         }
-        $fishs = fish::with('baket')->with('fishery')->get();
+        $fishs = fish::with('basket')->with('fishery')->get();
         //opens up the show page for the user
         return view('admin.fisheries.show')->with('fishery', $fishery);
     }

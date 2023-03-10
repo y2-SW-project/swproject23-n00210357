@@ -38,7 +38,7 @@
 
                             <div class="flex">
                             <p>
-                                <img src="{{asset('storage/app/public/images/fishery/' . $fishery->photo)}}" width="200"/>
+                                <img src="{{asset('storage/images/fishery/' . $fishery->photo)}}" width="200"/>
                             </p>
 
                             <div>

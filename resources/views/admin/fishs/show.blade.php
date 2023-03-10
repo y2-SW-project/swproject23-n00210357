@@ -33,7 +33,7 @@
 
                             <div class="flex">
                             <p>
-                            <img src="{{asset('storage/app/public/images/fish/' . $fish->image)}}" width="200"/>
+                                <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="200"/>
                             </p>
 
                             <p>

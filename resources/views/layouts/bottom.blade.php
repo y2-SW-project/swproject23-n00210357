@@ -1,65 +1,89 @@
 <div class="row blackBox">
     <div class="col-sm-5 col-lg-4">
-        <div class="size1 pale">
-            {{ __('Contact') }}
-        </div>
+        <h1 class="size1">
+            <div class="pale">
+                {{ __('Contact') }}
+            </div>
+        </h1>
 
         <div class="evenOut">
-            <div class="size3 pale evenOut">
-                {{ __('000 000 00 0000') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('000 000 00 0000') }}
+                </div>
+            </h3>
 
-            <div class="size3 pale evenOut">
-                {{ __('Email') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                        {{ __('Email') }}
+                </div>
+            </h3>
 
-            <div class="size3 pale evenOut">
-                {{ __('Were hiring') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Were hiring') }}
+                </div>
+            </h3>
         </div>
     </div>
 
     <div class="d-none d-lg-block col-4">
-        <div class="size1 pale">
-            {{ __('About us') }}
-        </div>
+        <h1 class="size1">
+            <div class="pale">
+                {{ __('About us') }}
+            </div>
+        </h1>
 
         <div class="evenOut">
-            <div class="size3 pale evenOut">
-                {{ __('Blog') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Blog') }}
+                </div>
+            </h3>
 
-            <div class="size3 pale evenOut">
-                {{ __('Funding') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Funding') }}
+                </div>
+            </h3>
 
-            <div class="size3 pale evenOut">
-                {{ __('Terms') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Terms') }}
+                </div>
+            </h3>
         </div>
     </div>
 
     <div class="col-sm-5 col-lg-4">
-        <div class="size1 pale">
-            {{ __('Philosophy') }}
-        </div>
+        <h1 class="size1">
+            <div class="pale">
+                {{ __('Philosophy') }}
+            </div>
+        </h1>
 
         <div class="evenOut">
-            <div class="size3 pale evenOut">
-                {{ __('Q/A') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Q/A') }}
+                </div>
+            </h3>
 
-            <div class="size3 pale evenOut">
-                {{ __('Transparently') }}
-            </div>
+            <h3 class="size3 evenOut">
+                <div class="pale">
+                    {{ __('Transparently') }}
+                </div>
+            </h3>
         </div>
     </div>
 </div>
 
 <nav class="row shadowed">
-    <div class="col-2 size1 pale">
+    <h1 class="col-2 size1">
+        <div class="pale">
         {{ __('Fish Store') }}
-    </div>
+        </div>
+    </h1>
 
     <div class="col righter">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-camera pale" viewBox="0 0 16 16">

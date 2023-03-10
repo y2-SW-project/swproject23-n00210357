@@ -1,6 +1,16 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="header">
+                <h1 class="size1">
+                    Fish Store
+                </h1>
+
+                <h4 class="size4">
+                    Purchase fish based on location or by angler
+                </h4>
+            </div>
+
             <x-alert-success>
                 {{session('success')}}
             </x-alert-success>
@@ -10,7 +20,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/app/public/images/fish/' . $fish->image)}}" width="200"/>
+                        <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="200"/>
                     </p>
                     </div>
 

@@ -22,6 +22,20 @@
         font-weight: normal;
     }
 
+    .size4
+    {
+        font-size: 16;
+        font-weight: normal;
+    }
+
+    .pale
+    {
+        color: white;
+        margin-left: 13px;
+        margin-right: 13px;
+    }
+
+
     .lightBorder
     {
         border: #696969;
@@ -59,13 +73,6 @@
         background-color: #0029FF;
     }
 
-    .pale
-    {
-        color: #ffffff;
-        margin-left: 13px;
-        margin-right: 13px;
-    }
-
     .shadowed
     {
         background-color: #2E2E2E;
@@ -76,6 +83,16 @@
     {
         background-color: #4E4E4E;
         min-height: 220px;
+    }
+
+    .header
+    {
+        background-image: url("../../storage/app/public/images/header.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        text-align: center;
     }
 
     .centerer
