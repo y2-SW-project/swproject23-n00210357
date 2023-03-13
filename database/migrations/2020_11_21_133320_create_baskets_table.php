@@ -17,11 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
-            $table->string('location');
-            $table->string('station_master');
-            $table->string('picture');
-            $table->boolean('has_dock');
-            $table->boolean('has_airport');
+            $table->decimal('cost');
             $table->timestamps();
         });
     }

@@ -128,6 +128,7 @@
 
 
             <div class="col dropdown">
+                <div class="d-none d-xl-block">
                     <button class="dropbtn colours-bg border-radius">
                         <h2 class="size2">{{ Auth::user()->name }}</h2>
                     </button>
@@ -144,6 +145,26 @@
                         </form>
                       </a>
                     </div>
+                </div>
+
+                <div class="d-sm-block d-md-block d-lg-block d-xl-none colours align-items-center">
+                    <button class="dropbtn colours-bg border-radius p-0">
+                        <h4 class="size2">{{ Auth::user()->name }}</h2>
+                    </button>
+                    <div class="dropdown-content">
+                    <a href="#">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                      </a>
+                    </div>
+                </div>
               </div>
 
               <!-- //dfsdfsdfsdfsdf

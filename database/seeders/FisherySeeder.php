@@ -20,11 +20,5 @@ class FisherySeeder extends Seeder
     public function run()
     {
         fishery::factory()->times(3)->create();
-
-        foreach(fish::all() as $fish)
-        {
-            $fisheries = fishery::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $fish->fishery()->attach($fisheries);
-        }
     }
 }

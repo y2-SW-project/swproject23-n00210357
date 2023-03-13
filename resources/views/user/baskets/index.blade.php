@@ -2,6 +2,43 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            <div class="header row">
+                <div class="col-sm-0 col-lg-5"></div>
+                <h1 class="size1 col-lg-2">
+                    Fish Store
+                </h1>
+                <div class="col-sm-0 col-lg-5"></div>
+
+                <div class="col-sm-0 col-lg-4"></div>
+                <h4 class="size4 col-lg-4">
+                    Search for fish by directly looking fish or by looking at fisheries
+                </h4>
+                <div class="col-sm-0 col-lg-4"></div>
+
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-3">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-decoration-none">
+                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
+                            <h2 class="size2 px-xs-2 px-lg-5">Fish</h2>
+                        </button>
+                    </x-nav-link>
+                </div>
+
+                <div class="col-lg-4"></div>
+
+                <div class="col-lg-3">
+                    <x-nav-link :href="route('home.fishery.index')" :active="request()->routeIs('home.fishery.index')" class="text-decoration-none">
+                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
+                            <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Fisheries</h2>
+                        </button>
+                    </x-nav-link>
+                </div>
+
+                <div class="col-lg-1"></div>
+            </div>
+
             <x-alert-success>
                 {{session('success')}}
             </x-alert-success>

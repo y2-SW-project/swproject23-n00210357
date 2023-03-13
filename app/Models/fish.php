@@ -20,10 +20,10 @@ class fish extends Model
         return 'uuid';
     }
 
-    //links fish to basket as a foreign key
-    public function basket()
+    //links fish to fishery as a foreign key
+    public function fishery()
     {
-        return $this->belongsTo(basket::class);
+        return $this->belongsTo(fishery::class);
     }
 
     //links fish to user as a foreign key
@@ -32,9 +32,9 @@ class fish extends Model
         return $this->belongsTo(user::class);
     }
 
-    //links fish to fishery as a foreign key
-    public function fishery()
+    //links fish to basket as a foreign key
+    public function basket()
     {
-        return $this->belongsToMany(fishery::class)->withTimestamps();
+        return $this->belongsToMany(basket::class)->withTimestamps();
     }
 }

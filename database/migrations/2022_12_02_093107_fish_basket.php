@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fisheries', function (Blueprint $table) {
+        Schema::create('fish_basket', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->foreignId('user_id')->constrained();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('certification');
-            $table->string('photo');
-            $table->decimal('salary');
+            $table->unsignedBigInteger('fish_id');
+            $table->unsignedBigInteger('basket_id');
+
+            $table->foreign('fish_id')->references('id')->on('fish')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('basket_id')->references('id')->on('baskets')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fisheries');
+        Schema::dropIfExists('fish_basket');
     }
 };

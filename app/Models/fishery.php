@@ -20,7 +20,7 @@ class fishery extends Model
     }
 
     //links fishery to fishs as a foreign key
-    public function fish()
+    public function fishs()
     {
         return $this->belongsToMany(fish::class)->withTimestamps();
     }

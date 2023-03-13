@@ -33,12 +33,12 @@ class fishFactory extends Factory
             //sets what is to be filled with data when seeder is called
         return [
             'uuid' => Str::uuid(),
-            'user_id' => $this->faker->randomElement([1, 2]),
-            'name' => $this->faker->name(),
-            'cargo' => $this->faker->text(),
+            'user_id' => $this->faker->randomElement([1, 1]),
+            'fishType' => $this->faker->name(),
+            'discription' => $this->faker->text(),
             'image' => $this->faker->randomElement(['F1.jpg', 'F2.jpg', 'F3.jpg']),
-            'cost' => $this->faker->randomFloat(2, 0, 500),
-            'basket_id' => $this->faker->randomElement([1, 2, 3]),
+            'price' => $this->faker->randomFloat(2, 0, 500),
+            'fishery_id' => $this->faker->randomElement([1, 3]),
         ];
     }
 

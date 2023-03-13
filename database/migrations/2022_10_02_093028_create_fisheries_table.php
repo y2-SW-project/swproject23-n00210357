@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fish_fishery', function (Blueprint $table) {
+        Schema::create('fisheries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fish_id');
-            $table->unsignedBigInteger('fishery_id');
-
-            $table->foreign('fish_id')->references('id')->on('fish')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('fishery_id')->references('id')->on('fisheries')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('uuid');
+            $table->string('location');
+            $table->string('dock');
+            $table->string('photo');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fish_fishery');
+        Schema::dropIfExists('fisheries');
     }
 };

@@ -12,18 +12,18 @@ return new class extends Migration
      * @return void
      */
 
-     //creates the table in the database called fishs and it has an id, uuid, user_id, name, cargo, image, cost and basket along with a time stamp of when it was made
+     //creates the table in the database called fishs and it has an id, uuid, user_id, name, description, image and price along with a time stamp of when it was made
     public function up()
     {
         Schema::create('fish', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
-            $table->string('name');
-            $table->string('cargo');
+            $table->string('fishType');
+            $table->string('discription');
             $table->string('image');
-            $table->decimal('cost');
-            //$table->foreignId('basket_id')->constrained();
+            $table->decimal('price');
+            //$table->foreignId('fishery_id')->constrained();
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      //this drops the table fishs if it exist already with in the database
     public function down()
     {
-        Schema::dropIfExists('fishs');
+        Schema::dropIfExists('fish');
     }
 };
