@@ -11,11 +11,11 @@
 
                         <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off" :value="@old('title', $fish->name)"></x-input>
 
-                        <x-textarea name="cargo" rows="10" placeholder="Start typing" class="w-full mt-6" value="{{@old('cargo', $fish->cargo)}}"></x-textarea>
+                        <x-textarea name="description" rows="10" placeholder="Start typing" class="w-full mt-6" value="{{@old('description', $fish->description)}}"></x-textarea>
 
                         <x-file-input type="file" name="image" placeholder="Fish" class="w-full mt-6" field="image" value="{{@old('image', $fish->image)}}"></x-file-input>
 
-                        <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $fish->cost)"></x-input>
+                        <x-input type="number" name="price" placeholder="price" class="w-full" autocomplete="off" :value="@old('price', $fish->price)"></x-input>
 
                         <label for="basket">Basket</label>
                         <select name="basket_id">

@@ -31,7 +31,7 @@ class FisheryController extends Controller
         //$fisheries = fishery::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-        $fisheries = Fishery::paginate(10);
+        $fisheries = Fishery::paginate(6);
 
         //brings the user to the index page along with the linked in fisheries
         return view('user.fisheries.index')->with('fisheries', $fisheries);

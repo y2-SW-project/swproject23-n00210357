@@ -9,46 +9,40 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('admin.fishs.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.fishs.store')}}" method="post" enctype="multipart/form-data" class="row mx-5">
                         @csrf
 
-                        <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off"></x-input>
-                        @error('name')
+                        <x-input type="text" name="fishType" placeholder="Input the type of fish" class="w-full col-sm-12 my-3" autocomplete="off"></x-input>
+                        @error('fishType')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-textarea name="cargo" rows="10" placeholder="Start typing" class="w-full mt-6"></x-textarea>
-                        @error('cargo')
+                        <x-textarea name="description" rows="10" placeholder="Description" class="w-full my-3 col-sm-12"></x-textarea>
+                        @error('description')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-file-input type="file" name="image" placeholder="Fish" class="w-full mt-6" field="image"></x-file-input>
+                        <x-file-input type="file" name="image" placeholder="Fish" class="w-full mx-5 my-3" field="image"></x-file-input>
 
-                        <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off"></x-input>
-                        @error('cost')
+                        <div class="mx-5 my-3 col-sm-12">
+                        <x-input type="number" name="price" placeholder="price" class="w-full" autocomplete="off"></x-input>
+                        @error('price')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
+                        </div>
 
-                        <label for="basket">Basket</label>
-                        <select name="basket_id">
-                        @foreach($basket as $basket)
-                        <option value="{{$basket->id}}" {{(old('basket_id') == $basket->id) ? "selected" : ""}}>
-                            {{$basket->location}}
+                        <div class="mx-5 my-3 col-sm-12">
+                        <label for="fisheries">Fishery</label>
+                        <select name="fisheries_id">
+                        @foreach($fisheries as $fisheries)
+                        <option value="{{$fisheries->id}}" {{(old('fisheries_id') == $fisheries->id) ? "selected" : ""}}>
+                            {{$fisheries->location}}
                         </option>
                         @endforeach
                         </select>
-
-                        <div class="form-group">
-                            <label for="fisheries"> <strong> Fisheries</strong> <br> </label>
-                            @foreach ($fisheries as $fishery)
-                            <input type="checkbox", value="{{$fishery->id}}" name="fisheries[]">
-                            {{$fishery->first_name}}
-
-                            @endforeach
-
                         </div>
 
-                        <button class="my-6"> Save Fish</button>
+                        <button class="mx-5 my-3 col-sm-12 border border-3 colours-bg"> Save Fish</button>
                     </form>
                 </div>
             </div>

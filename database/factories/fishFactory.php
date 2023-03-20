@@ -23,9 +23,9 @@ class fishFactory extends Factory
     uuid is filled with a random uuid
     user_id is hard coded to be user 1
     name uses faker name making it a random name
-    cargo uses faker text giving it some random text
+    description uses faker text giving it some random text
     image is hard coded with the image names and randomize between the three
-    cost uses faker random float 2 which is meant to fill it with a random float with up to point two digits but it usally comes up with an out of cost bounds error that stops the seeding process but still fills in the prevously valid ones
+    price uses faker random float 2 which is meant to fill it with a random float with up to point two digits but it usally comes up with an out of price bounds error that stops the seeding process but still fills in the prevously valid ones
     basket uses faker random digit not 2 which makes it a random single digit number (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
     */
     public function definition()
@@ -35,7 +35,7 @@ class fishFactory extends Factory
             'uuid' => Str::uuid(),
             'user_id' => $this->faker->randomElement([1, 1]),
             'fishType' => $this->faker->name(),
-            'discription' => $this->faker->text(),
+            'description' => $this->faker->text(),
             'image' => $this->faker->randomElement(['F1.jpg', 'F2.jpg', 'F3.jpg']),
             'price' => $this->faker->randomFloat(2, 0, 500),
             'fishery_id' => $this->faker->randomElement([1, 3]),

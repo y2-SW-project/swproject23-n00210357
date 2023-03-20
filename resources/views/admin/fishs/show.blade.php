@@ -37,11 +37,11 @@
                             </p>
 
                             <p>
-                               The Cargo consists of {{$fish->cargo}}
+                                {{$fish->description}}
                             </p>
 
                              <p>
-                                Cost of €{{$fish->cost}}
+                                price of €{{$fish->price}}
                              </p>
                             </div>
 

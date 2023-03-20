@@ -51,31 +51,33 @@
                         </x-nav-link>
                     </div>
                 <div class="col-sm-1 col-lg-4"></div>
+
                 @forelse ($fishs as $fish)
                 <div class="col-sm-12 col-lg-4">
-                    <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
-                        <div>
-                            <p class="whitespace-pre-wrap text-center">
+                    <div class="border border-4 card m-5 p-0" style="width: 390px">
+
+                        <a href="{{ route('admin.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
                             <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="382" height="150"/>
-                            </p>
+                        </a>
+
+                        <div class="noWrap">
+                            <h5 class="size5">
+                                Caught by <span class="size6">{{$fish->user->name}}</span>
+                            </h5>
+
+                            <h1>
+                                {{$fish->fishType}}
+                            </h1>
+
+                            <h4 class="size4">
+                                Caught at <span>{{$fish->fishery->location}} </span>
+                            </h4>
+
+                            <h5 class="size5">
+                                Price €<span class="size6">{{$fish->price}}</span>
+                            </h5>
+
                         </div>
-
-                        <div>
-                            <h2>
-                                <a href="{{ route('admin.fishs.show', $fish) }}"> {{$fish->fishType}}</a>
-                            </h2>
-
-                            <p class="mt-2">
-                                {{Str::limit($fish->discription), 200}}
-                            </p>
-
-                            <p class="mt-2">
-                                Caught by {{$fish->user->name}}
-                            </p>
-
-                        </div>
-
-                        <span class="block mt-4 text-sm opacity-70"> {{$fish->updated_at->diffForHumans()}}</span>
                     </div>
                 </div>
                 @empty

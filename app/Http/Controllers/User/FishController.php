@@ -30,7 +30,7 @@ class FishController extends Controller
         //$fishs = fish::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-        $fishs = Fish::paginate(10);
+        $fishs = Fish::paginate(6);
 
         //brings the user to the index page along with the linked in fishs
         return view('user.fishs.index')->with('fishs', $fishs);

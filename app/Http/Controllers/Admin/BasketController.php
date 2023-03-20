@@ -28,7 +28,7 @@ class BasketController extends Controller
          //$baskets = basket::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-         $baskets = Basket::paginate(10);
+         $baskets = Basket::paginate(1);
 
          //brings the user to the index page along with the linked in baskets
          return view('admin.baskets.index')->with('baskets', $baskets);

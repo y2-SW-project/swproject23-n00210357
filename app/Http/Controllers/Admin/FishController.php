@@ -30,7 +30,7 @@ class FishController extends Controller
         //$fishs = fish::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
 
-        $fishs = Fish::paginate(10);
+        $fishs = Fish::paginate(6);
 
         //brings the user to the index page along with the linked in fishs
         return view('admin.fishs.index')->with('fishs', $fishs);
@@ -69,11 +69,11 @@ class FishController extends Controller
 
         //checks if given data is valid before sending to database
         $request->validate([
-            'name' => 'required|max:120',
-            'cargo' => 'required',
+            'fishType' => 'required|max:120',
+            'description' => 'required',
             //'image' => 'required',
             'image' => 'file|image',
-            'cost' => 'required|between:0,9999.99',
+            'price' => 'required|between:0,9999.99',
             'basketn_id' => 'required|integer',
             'fisheries' =>['required' , 'exists:fisheries,id']
         ]);
@@ -88,10 +88,10 @@ class FishController extends Controller
         $fish = Fish::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
-            'name' => $request->name,
-            'cargo' => $request->cargo,
+            'fishType' => $request->fishType,
+            'description' => $request->description,
             'image' => $filename,
-            'cost' => $request->cost,
+            'price' => $request->price,
             'basketn_id' => $request->basketn_id
         ]);
 
@@ -171,10 +171,10 @@ class FishController extends Controller
 
         //inserts the current values of the selected page onto the page
         $request->validate([
-            'name' => 'required|max:120',
-            'cargo' => 'required',
+            'fishType' => 'required|max:120',
+            'description' => 'required',
             'image' => 'file|image',
-            'cost' => 'required|between:0,9999.99',
+            'price' => 'required|between:0,9999.99',
             'basketn_id' => 'required|integer',
         ]);
 
@@ -186,10 +186,10 @@ class FishController extends Controller
 
         //updates the selected fishs value to their new values
         $fish->update([
-            'name' => $request->name,
-            'cargo' => $request->cargo,
+            'fishType' => $request->fishType,
+            'description' => $request->description,
             'image' => $filename,
-            'cost' => $request->cost,
+            'price' => $request->price,
             'basketn_id' => $request->basketn_id
         ]);
 

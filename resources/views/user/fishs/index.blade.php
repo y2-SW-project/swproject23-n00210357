@@ -38,7 +38,7 @@
 
                 <div class="col-lg-1"></div>
             </div>
-            
+
             <x-alert-success>
                 {{session('success')}}
             </x-alert-success>
@@ -57,7 +57,7 @@
                     </h2>
 
                     <p class="mt-2">
-                        {{Str::limit($fish->cargo), 200}}
+                        {{Str::limit($fish->description), 200}}
                     </p>
 
                     <p class="mt-2">

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
             $table->string('fishType');
-            $table->string('discription');
+            $table->string('description');
             $table->string('image');
             $table->decimal('price');
             //$table->foreignId('fishery_id')->constrained();
