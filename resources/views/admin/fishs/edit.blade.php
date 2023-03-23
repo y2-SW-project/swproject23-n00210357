@@ -17,11 +17,10 @@
 
                         <x-input type="number" name="price" placeholder="price" class="w-full" autocomplete="off" :value="@old('price', $fish->price)"></x-input>
 
-                        <label for="basket">Basket</label>
-                        <select name="basket_id">
-                        @foreach($basket as $basket)
-                        <option value="{{$basket->id}}" {{(old('basket_id') == $basket->id) ? "selected" : ""}}>
-                            {{$basket->location}}
+                        <select name="fisheries">
+                        @foreach($fisheries as $fishery)
+                        <option value="{{$fishery->id}}" {{(old('fisheries_id') == $fishery->id) ? "selected" : ""}}>
+                            {{$fishery->location}}
                         </option>
                         @endforeach
                         </select>

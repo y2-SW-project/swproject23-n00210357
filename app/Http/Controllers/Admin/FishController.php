@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\basket;
 use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
@@ -49,9 +48,8 @@ class FishController extends Controller
         $user->authorizeRoles('admin');
 
         //sends the user to the create page
-        $basket = basket::all();
         $fisheries = fishery::all();
-        return view('admin.fishs.create')->with('basket', $basket)->with('fisheries', $fisheries);
+        return view('admin.fishs.create')->with('fisheries', $fisheries);
     }
 
     /**
@@ -62,44 +60,39 @@ class FishController extends Controller
      */
 
 //when called it stores the given data for fishs into the database fish table
-    public function store(Request $request)
-    {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
+public function store(Request $request)
+{
+    //checks if given data is valid before sending to database
+    $request->validate([
+        'fishType' => 'required|max:120',
+        'description' => 'required',
+        //'image' => 'required',
+        'price' => 'required|between:0,9999.99',
+        'fisheries' => 'required|integer',
+    ]);
 
-        //checks if given data is valid before sending to database
-        $request->validate([
-            'fishType' => 'required|max:120',
-            'description' => 'required',
-            //'image' => 'required',
-            'image' => 'file|image',
-            'price' => 'required|between:0,9999.99',
-            'basketn_id' => 'required|integer',
-            'fisheries' =>['required' , 'exists:fisheries,id']
-        ]);
+    //$image = $request->file('image');
+    //$extension = $image->getClientOriginalExtension();
 
-        $image = $request->file('image');
-        $extension = $image->getClientOriginalExtension();
-        // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
-        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $image->storeAs('public/images/fish', $filename);
+    //$filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
 
-        //uses the new data to create a new fish in the fish table
-        $fish = Fish::create([
-            'uuid' => Str::uuid(),
-            'user_id' => Auth::id(),
-            'fishType' => $request->fishType,
-            'description' => $request->description,
-            'image' => $filename,
-            'price' => $request->price,
-            'basketn_id' => $request->basketn_id
-        ]);
+    //$path = $image->storeAs('public/images', $filename);
 
-        //brings the user to the index page
-        $basket = basket::all();
-        $fish->fishery()->attach($request->fisheries);
-        return to_route('admin.fishs.index')->with('basket',$basket);
-    }
+    //uses the new data to create a new train in the train table
+    Fish::create([
+        'uuid' => Str::uuid(),
+        'user_id' => Auth::id(),
+        'fishType' => $request->fishType,
+        'description' => $request->description,
+        'image' => $request->image,
+        'price' => $request->price,
+        'fishery_id' => $request->fisheries
+    ]);
+
+    //brings the user to the index page
+    $fishs = Fish::paginate(6);
+    return view('admin.fishs.index')->with('fishs', $fishs);
+}
 
     /**
      * Display the specified resource.
@@ -114,7 +107,7 @@ class FishController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $fishs = fish::with('basket')->with('fishery')->get();
+        $fishs = fish::with('fishery')->get();
         //checks that the fishs are the property of the user otheir wise it calls a 403 error
         if ($fish->user_id != Auth::id())
         {
@@ -145,8 +138,8 @@ class FishController extends Controller
         }
 
         //opens up the edit page for the user with their selected fish
-        $basket = basket::all();
-        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('basket',$basket);
+        $fisheries = fishery::all();
+        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
     }
 
     /**
@@ -175,7 +168,7 @@ class FishController extends Controller
             'description' => 'required',
             'image' => 'file|image',
             'price' => 'required|between:0,9999.99',
-            'basketn_id' => 'required|integer',
+            'fishery_id' => 'required|integer',
         ]);
 
         $image = $request->file('image');
@@ -190,11 +183,11 @@ class FishController extends Controller
             'description' => $request->description,
             'image' => $filename,
             'price' => $request->price,
-            'basketn_id' => $request->basketn_id
+            'fisheries_id' => $request->fisheries_id
         ]);
 
-        //returns the user to show page and plays the success message Fish updated
-        $basket = basket::all();
+        //returns the user to show page and plays the success message Fish updated      
+        $fisheries = fishery::all();
         return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('basket',$basket);
     }
 

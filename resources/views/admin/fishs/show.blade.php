@@ -53,31 +53,19 @@
 
                              <div class="flex">
                              <div>
-                                <img src="{{asset('storage/images/basket/' . $fish->basket->picture)}}" width="200"/>
+                                <img src="{{asset('storage/images/fisheries/' . $fish->image)}}" width="200"/>
                              </div>
 
                              <div>
                              <p>
-                                {{$fish->basket->location}}
+                                {{$fish->fisheries}}
                              </p>
 
                              <p class="">
-                                Station Master {{$fish->basket->station_master}}
+                                Station Master {{$fish->fisheries}}
                              </p>
                              </div>
                              </div>
-
-                             <div class="p-6"></div>
-
-                        <div>
-                            @foreach ($fish->fishery as $fishery)
-                            <tr>
-                                <td class="font-bold">Fishery</td>
-                                <td> {{$fishery->first_name}} </td>
-                                <td> {{$fishery->last_name}} </td>
-                            </tr>
-                            @endforeach
-                        </div>
                             </tbody>
                              <table>
                         </div>

@@ -25,6 +25,7 @@
                         <x-file-input type="file" name="image" placeholder="Fish" class="w-full mx-5 my-3" field="image"></x-file-input>
 
                         <div class="mx-5 my-3 col-sm-12">
+                        <label for="price"> <strong> Price</strong> <br> </label>
                         <x-input type="number" name="price" placeholder="price" class="w-full" autocomplete="off"></x-input>
                         @error('price')
                         <div class="text-red-600 text-sm">{{$message}}</div>
@@ -32,14 +33,17 @@
                         </div>
 
                         <div class="mx-5 my-3 col-sm-12">
-                        <label for="fisheries">Fishery</label>
-                        <select name="fisheries_id">
-                        @foreach($fisheries as $fisheries)
-                        <option value="{{$fisheries->id}}" {{(old('fisheries_id') == $fisheries->id) ? "selected" : ""}}>
-                            {{$fisheries->location}}
+                        <label for="fisheries"> <strong> Fisheries</strong> <br> </label>
+                        
+                        <select name="fisheries">
+                        @foreach($fisheries as $fishery)
+                        <option value="{{$fishery->id}}" {{(old('fisheries_id') == $fishery->id) ? "selected" : ""}}>
+                            {{$fishery->location}}
                         </option>
                         @endforeach
                         </select>
+                        
+                    
                         </div>
 
                         <button class="mx-5 my-3 col-sm-12 border border-3 colours-bg"> Save Fish</button>
