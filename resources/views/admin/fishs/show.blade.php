@@ -6,70 +6,71 @@
                 {{session('success')}}
             </x-alert-success>
 
-            <div class ="flex">
-                <p class="opacity-70">
+            <div class ="row text-center py-3">
+                <h4 class="size-4 col-3">
                     <strong>Created: </strong> {{$fish->created_at->diffForHumans()}}
-                </p>
+                </h3>
 
-                <p class="opacity-70 ml-8">
+                <h4 class="size-4 ml-8 col-3">
                     <strong>Updated at: </strong> {{$fish->updated_at->diffForHumans()}}
-                </p>
+                </h3>
 
-                <a href="{{ route('admin.fishs.edit', $fish) }}" class="btn-link ml-auto">Edit Fish</a>
+                <x-nav-link :href="route('admin.fishs.edit', $fish)" :active="request()->routeIs('admin.fishs.edit', $fish)" class="text-decoration-none col-3">
+                    <button class="dropbtn colours-bg border-radius">
+                        <h4 class="size4">Edit Fish</h4>
+                    </button>
+                </x-nav-link>
 
-                <form action="{{ route('admin.fishs.destroy', $fish) }}" method="post">
+                <form action="{{ route('admin.fishs.destroy', $fish) }}" method="post" class="col-3 py-1">
                     @method('delete')
                     @csrf
-                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure')">Delete Fish</button>
+                    <button class="dropbtn colours-bg border-radius" onclick="return confirm('Are you sure')">
+                        <h4 class="size4">Delete Fish</h4>
+                    </button>
                 </form>
-                </div>
-                <table>
-                    <tbody>
+            </div>
 
-                        <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
-                            <h2>
-                             The Fish is {{$fish->name}}
-                            </h2>
+            <table>
+                <tbody>
+                    <div class="row p-5">
+                        <h2 class="col-12 text-center">
+                            The Fish is {{$fish->fishType}}
+                        </h2>
 
-                            <div class="flex">
+                        <div class="col-6">
                             <p>
-                                <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="200"/>
+                                <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="380"/>
                             </p>
+                        </div>
 
+                        <div class="col-6">
                             <p>
                                 {{$fish->description}}
                             </p>
 
-                             <p>
-                                price of €{{$fish->price}}
-                             </p>
-                            </div>
-
-                        <div class="p-6"></div>
-
-                             <h2>
-                                Basket
-                             </h2>
-
-                             <div class="flex">
-                             <div>
-                                <img src="{{asset('storage/images/fisheries/' . $fish->image)}}" width="200"/>
-                             </div>
-
-                             <div>
-                             <p>
-                                {{$fish->fisheries}}
-                             </p>
-
-                             <p class="">
-                                Station Master {{$fish->fisheries}}
-                             </p>
-                             </div>
-                             </div>
-                            </tbody>
-                             <table>
+                            <p>
+                                The price of this fish is €{{$fish->price}}
+                            </p>
                         </div>
-            </div>
+
+                        <div class="col-6">
+                            <div>
+                                <img src="{{asset('storage/images/fisheries/' . $fish->fishery->photo)}}" width="380"/>
+                             </div>
+                        </div>
+
+                        <div class="col-6">
+                            <p>
+                                Fishery is {{$fish->fishery->location}}
+                            </p>
+
+                            <p>
+                                Its dock is {{$fish->fishery->dock}}
+                            </p>
+                        </div>
                     </div>
-                </div>
-        </x-app-layout>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-app-layout>
