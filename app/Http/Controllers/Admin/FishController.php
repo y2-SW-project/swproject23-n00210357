@@ -66,17 +66,16 @@ public function store(Request $request)
     $request->validate([
         'fishType' => 'required|max:120',
         'description' => 'required',
-        //'image' => 'required',
+        'image' => 'required',
         'price' => 'required|between:0,9999.99',
         'fisheries' => 'required|integer',
     ]);
 
-    //$image = $request->file('image');
-    //$extension = $image->getClientOriginalExtension();
-
-    //$filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
-
-    //$path = $image->storeAs('public/images', $filename);
+    $image = $request->file('image');
+    $extension = $image->getClientOriginalExtension();
+    // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
+    $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+    $path = $image->storeAs('public/images/fish', $filename);
 
     //uses the new data to create a new train in the train table
     Fish::create([
@@ -84,7 +83,7 @@ public function store(Request $request)
         'user_id' => Auth::id(),
         'fishType' => $request->fishType,
         'description' => $request->description,
-        'image' => $request->image,
+        'image' => $filename,
         'price' => $request->price,
         'fishery_id' => $request->fisheries
     ]);
@@ -183,12 +182,12 @@ public function store(Request $request)
             'description' => $request->description,
             'image' => $filename,
             'price' => $request->price,
-            'fisheries_id' => $request->fisheries_id
+            'fishery_id' => $request->fishery_id
         ]);
 
-        //returns the user to show page and plays the success message Fish updated      
+        //returns the user to show page and plays the success message Fish updated
         $fisheries = fishery::all();
-        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('basket',$basket);
+        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
     }
 
     /**

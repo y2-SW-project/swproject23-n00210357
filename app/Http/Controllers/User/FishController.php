@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\basket;
 use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
@@ -49,7 +48,7 @@ class FishController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('user');
 
-        $fishs = fish::with('basket')->with('fishery')->get();
+        $fishs = fish::with('fishery')->get();
         //checks that the fishs are the property of the user otheir wise it calls a 403 error
         if ($fish->user_id != Auth::id())
         {

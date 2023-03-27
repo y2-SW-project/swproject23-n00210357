@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\basket;
 use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-//controlles the placement of the fisheries table/model across the laravel website
+//controlles the placement of the fishs table/model across the laravel website
 class FisheryController extends Controller
 {
     /**
@@ -24,7 +23,6 @@ class FisheryController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-
         $fisheries = fishery::with('user')->get();
         $fisheries = fishery::all();
         //authenticates the fisheries to their latest update in pages of 5
@@ -37,107 +35,101 @@ class FisheryController extends Controller
         return view('admin.fisheries.index')->with('fisheries', $fisheries);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
 
      //when called sends the user to the fisheries create page
-     public function create()
-     {
-         $user = Auth::user();
-         $user->authorizeRoles('admin');
-
-         //sends the user to the create page
-         $fishs = fish::all();
-         return view('admin.fisheries.create')->with('fishs', $fishs);
-     }
-
-     //when called it stores the given data for fisheries into the database fishery table
-    public function store(Request $request)
+    public function create()
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //checks if given data is valid before sending to database
-        $request->validate([
-            'first_name' => 'required|max:120',
-            'last_name' => 'required|max:120',
-            'certification' => 'required',
-            //'image' => 'required',
-            'photo' => 'file|image',
-            'salary' => 'required|between:0,9999.99',
-            'fish' =>['required' , 'exists:fishs,id']
-        ]);
-
-        $photo = $request->file('photo');
-        $extension = $photo->getClientOriginalExtension();
-        // the name $namefile needs to be unique, I use title and add the date to guarantee a unique name$namefile, ISBN would be better here.
-        $namefile = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $photo->storeAs('public/images/fishery', $namefile);
-
-        //uses the new data to create a new fish in the fishery table
-        $fishery = Fishery::create([
-            'uuid' => Str::uuid(),
-            'user_id' => Auth::id(),
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'certification' => $request->certification,
-            'photo' => $namefile,
-            'salary' => $request->salary
-        ]);
-
-        //brings the user to the index page
-        $fishery->fish()->attach($request->fish);
-        return to_route('admin.fisheries.index');
+        //sends the user to the create page
+        $fish = fish::all();
+        return view('admin.fisheries.create')->with('fish', $fish);
     }
 
     /**
-      * Display the specified resource.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
-      // brings the user to their show page when called
-      public function show(Fishery $fishery)
+//when called it stores the given data for fisheries into the database fishery table
+public function store(Request $request)
+{
+    //checks if given data is valid before sending to database
+    $request->validate([
+        'location' => 'required|max:120',
+        'dock' => 'required|max:120',
+        'photo' => 'required',
+    ]);
+
+    $photo = $request->file('photo');
+    $extension = $photo->getClientOriginalExtension();
+    // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
+    $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+    $path = $photo->storeAs('public/images/fish', $filename);
+
+    //uses the new data to create a new train in the train table
+    Fishery::create([
+        'uuid' => Str::uuid(),
+        'location' => $request->location,
+        'dock' => $request->dock,
+        'photo' => $filename,
+    ]);
+
+    //brings the user to the index page
+    $fisheries = Fishery::paginate(6);
+    return view('admin.fisheries.index')->with('fisheries', $fisheries);
+}
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+     // brings the user to their show page when called
+     public function show(Fishery $fishery)
      {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
+         $user = Auth::user();
+         $user->authorizeRoles('admin');
 
-        $fisheries = fishery::with('fish')->get();
-        //checks that the fisheries are the property of the user otheir wise it calls a 403 error
-        if ($fishery->user_id != Auth::id())
-        {
-            return abort(403);
-        }
-        $fishs = fish::with('basket')->with('fishery')->get();
-        //opens up the show page for the user
-        return view('admin.fisheries.show')->with('fishery', $fishery);
-    }
+         $fisheries = fishery::get();
+         //checks that the fisheries are the property of the user otheir wise it calls a 403 error
 
-     /**
+         //opens up the show page for the user
+         return view('admin.fisheries.show')->with('fishery', $fishery);
+     }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
 
-    //sends the user the the edit page with their selected fishery
-    public function edit(Fishery $fishery)
+    //sends the user the the edit page with their selected fish
+    public function edit(Fish $fish)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the fishery id is not connected to the user preventing another user from opining the edit page on someone elses fishery
-        if ($fishery->user_id != Auth::id())
+        //call error 403 if the fish id is not connected to the user preventing another user from opining the edit page on someone elses fish
+        if ($fish->user_id != Auth::id())
         {
             return abort(403);
         }
 
-        //opens up the edit page for the user with their selected fishery
-        return view('admin.fisheries.edit')->with('fishery', $fishery)->with('success', 'Fishery updated');
+        //opens up the edit page for the user with their selected fish
+        $fisheries = fishery::all();
+        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
     }
 
     /**
@@ -148,68 +140,69 @@ class FisheryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //pulls the update page with the selected fisheries data already filled in and prepared to be edited
-    public function update(Request $request, Fishery $fishery)
+    //pulls the update page with the selected fishs data already filled in and prepared to be edited
+    public function update(Request $request, Fish $fish)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the fishery id is not connected to the user preventing another user from editing someone elses fishery
-        if ($fishery->user_id != Auth::id())
+        //call error 403 if the fish id is not connected to the user preventing another user from editing someone elses fish
+        if ($fish->user_id != Auth::id())
         {
             return abort(403);
         }
 
-        //checks if given data is valid before sending to database
+        //inserts the current values of the selected page onto the page
         $request->validate([
-            'first_name' => 'required|max:120',
-            'last_name' => 'required|max:120',
-            'certification' => 'required',
-            'photo' => 'file|image',
-            'salary' => 'required|between:0,9999.99'
+            'fishType' => 'required|max:120',
+            'description' => 'required',
+            'image' => 'file|image',
+            'price' => 'required|between:0,9999.99',
+            'fishery_id' => 'required|integer',
         ]);
 
-        $photo = $request->file('photo');
-        $extension = $photo->getClientOriginalExtension();
-        // the name $namefile needs to be unique, I use title and add the date to guarantee a unique name$namefile, ISBN would be better here.
-        $namefile = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $photo->storeAs('public/images/fishery', $namefile);
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $path = $image->storeAs('public/images/fish', $filename);
 
-        //updates the selected fisheries value to their new values
-        $fishery->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'certification' => $request->certification,
-            'photo' => $namefile,
-            'salary' => $request->salary
+        //updates the selected fishs value to their new values
+        $fish->update([
+            'fishType' => $request->fishType,
+            'description' => $request->description,
+            'image' => $filename,
+            'price' => $request->price,
+            'fishery_id' => $request->fishery_id
         ]);
 
-        //returns the user to show page and plays the success message Fishery updated
-        return to_route('admin.fisheries.show', $fishery)->with('success', 'Fishery updated');
+        //returns the user to show page and plays the success message Fish updated
+        $fisheries = fishery::all();
+        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
 
-     //when called with a fishery id it allows it to be deleted and sends the user back to the users index page
-     public function destroy(Fishery $fishery)
-     {
-         $user = Auth::user();
-         $user->authorizeRoles('admin');
+     //when called with a fish id it allows it to be deleted and sends the user back to the users index page
+    public function destroy(Fish $fish)
+    {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
 
-         //call error 403 if the fishery id is not connected to the user preventing another user from deleting someone elses fishery
-         if ($fishery->user_id != Auth::id())
-         {
-             return abort(403);
-         }
+        //call error 403 if the fish id is not connected to the user preventing another user from deleting someone elses fish
+        if ($fish->user_id != Auth::id())
+        {
+            return abort(403);
+        }
 
-         $fishery->delete();
+        $fish->delete();
 
-         //returns the user to index page and plays the success message Fishery deleted
-         return to_route('admin.fisheries.index')->with('success', 'Fishery deleted');
-     }
+        //returns the user to index page and plays the success message Fish deleted
+        return to_route('admin.fishs.index')->with('success', 'Fish deleted');
+    }
 }

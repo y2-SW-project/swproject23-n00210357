@@ -83,7 +83,14 @@
                 @empty
                 <p>Their are no fish on the market</p>
                 @endforelse
-                {{$fishs->links()}}
+
+                <div class="row">
+                    <div class="col-10"></div>
+
+                    <div class="col-2">
+                    {{$fishs->links()}}
+                    </div>
+                </div>
 
             </div>
         </div>

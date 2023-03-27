@@ -9,41 +9,22 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('admin.fisheries.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.fisheries.store')}}" method="post" enctype="multipart/form-data" class="row mx-5">
                         @csrf
 
-                        <x-input name="first_name" rows="10" placeholder="Start typing" class="w-full mt-6"></x-input>
-                        @error('first_name')
+                        <x-input type="text" name="location" placeholder="Input the type of fish" class="w-full col-sm-12 my-3" autocomplete="off"></x-input>
+                        @error('location')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-input name="last_name" rows="10" placeholder="Start typing" class="w-full mt-6"></x-input>
-                        @error('last_name')
+                        <x-textarea name="dock" rows="10" placeholder="Description" class="w-full my-3 col-sm-12"></x-textarea>
+                        @error('dock')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-textarea name="certification" rows="10" placeholder="Start typing" class="w-full mt-6"></x-textarea>
-                        @error('certification')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        <x-file-input type="file" name="photo" placeholder="Fish" class="w-full mx-5 my-3" field="photo"></x-file-input>
 
-                        <x-file-input type="file" name="photo" placeholder="Fish" class="w-full mt-6" field="image"></x-file-input>
-
-                        <x-input type="number" name="salary" placeholder="yearly salary" class="w-full" autocomplete="off"></x-input>
-                        @error('salary')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
-
-                        <div class="form-group">
-                            <label for="fish"> <strong> Fishes</strong> <br> </label>
-                            @foreach ($fishes as $fish)
-                            <input type="checkbox", value="{{$fish->id}}" name="fish[]">
-                            {{$fish->name}}
-
-                            @endforeach
-                        </div>
-
-                        <button class="my-6"> Save Fishery</button>
+                        <button class="mx-5 my-3 col-sm-12 border border-3 colours-bg"> Save Fish</button>
                     </form>
                 </div>
             </div>

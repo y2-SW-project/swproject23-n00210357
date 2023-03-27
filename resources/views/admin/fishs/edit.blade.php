@@ -9,7 +9,7 @@
                         @method('put')
                         @csrf
 
-                        <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off" :value="@old('title', $fish->name)"></x-input>
+                        <x-input type="text" name="fishType" placeholder="Title" class="w-full" autocomplete="off" :value="@old('title', $fish->fishType)"></x-input>
 
                         <x-textarea name="description" rows="10" placeholder="Start typing" class="w-full mt-6" value="{{@old('description', $fish->description)}}"></x-textarea>
 
@@ -17,9 +17,10 @@
 
                         <x-input type="number" name="price" placeholder="price" class="w-full" autocomplete="off" :value="@old('price', $fish->price)"></x-input>
 
-                        <select name="fisheries">
+                        <label for="fisheries">Fishery</label>
+                        <select name="fishery_id">
                         @foreach($fisheries as $fishery)
-                        <option value="{{$fishery->id}}" {{(old('fisheries_id') == $fishery->id) ? "selected" : ""}}>
+                        <option value="{{$fishery->id}}" {{(old('fishery_id') == $fishery->id) ? "selected" : ""}}>
                             {{$fishery->location}}
                         </option>
                         @endforeach
