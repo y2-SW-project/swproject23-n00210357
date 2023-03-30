@@ -73,7 +73,7 @@ public function store(Request $request)
     $extension = $photo->getClientOriginalExtension();
     // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
     $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-    $path = $photo->storeAs('public/images/fish', $filename);
+    $path = $photo->storeAs('public/images/fisheries', $filename);
 
     //uses the new data to create a new train in the train table
     Fishery::create([
@@ -105,7 +105,8 @@ public function store(Request $request)
          //checks that the fisheries are the property of the user otheir wise it calls a 403 error
 
          //opens up the show page for the user
-         return view('admin.fisheries.show')->with('fishery', $fishery);
+         $fish = fish::all();
+         return view('admin.fisheries.show')->with('fishery', $fishery)->with('fish', $fish);
      }
 
     /**
@@ -116,20 +117,14 @@ public function store(Request $request)
      */
 
     //sends the user the the edit page with their selected fish
-    public function edit(Fish $fish)
+    public function edit(Fishery $fishery)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the fish id is not connected to the user preventing another user from opining the edit page on someone elses fish
-        if ($fish->user_id != Auth::id())
-        {
-            return abort(403);
-        }
-
-        //opens up the edit page for the user with their selected fish
+        //opens up the edit page for the user with their selected fisheries
         $fisheries = fishery::all();
-        return view('admin.fishs.edit')->with('fish', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
+        return view('admin.fisheries.edit')->with('fisheries', $fisheries)->with('success', 'Fishery updated');
     }
 
     /**
@@ -141,44 +136,37 @@ public function store(Request $request)
      */
 
     //pulls the update page with the selected fishs data already filled in and prepared to be edited
-    public function update(Request $request, Fish $fish)
+    public function update(Request $request, Fishery $fishery)
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        //call error 403 if the fish id is not connected to the user preventing another user from editing someone elses fish
-        if ($fish->user_id != Auth::id())
+        if ($fishery->user_id != Auth::id())
         {
             return abort(403);
         }
-
         //inserts the current values of the selected page onto the page
         $request->validate([
-            'fishType' => 'required|max:120',
-            'description' => 'required',
-            'image' => 'file|image',
-            'price' => 'required|between:0,9999.99',
-            'fishery_id' => 'required|integer',
+            'location' => 'required|max:120',
+            'dock' => 'required',
+            'photo' => 'file|image',
         ]);
 
-        $image = $request->file('image');
-        $extension = $image->getClientOriginalExtension();
+        $photo = $request->file('photo');
+        $extension = $photo->getClientOriginalExtension();
         // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
         $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $image->storeAs('public/images/fish', $filename);
+       $path = $photo->storeAs('public/images/fisheries', $filename);
 
-        //updates the selected fishs value to their new values
-        $fish->update([
-            'fishType' => $request->fishType,
-            'description' => $request->description,
-            'image' => $filename,
-            'price' => $request->price,
-            'fishery_id' => $request->fishery_id
+        //updates the selected fisheries value to their new values
+        $fishery->update([
+            'location' => $request->location,
+            'dock' => $request->dock,
+            'photo' => $filename,
         ]);
 
-        //returns the user to show page and plays the success message Fish updated
-        $fisheries = fishery::all();
-        return to_route('admin.fishs.show', $fish)->with('success', 'Fish updated')->with('fisheries',$fisheries);
+        //returns the user to show page and plays the success message Fishery updated
+        return to_route('admin.fisheries.show', $fishery)->with('success', 'Fishery updated');
     }
 
     /**
