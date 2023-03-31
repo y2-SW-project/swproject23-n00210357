@@ -36,23 +36,6 @@ class HomeController extends Controller
         return redirect()->route($home);
     }
 
-    //bring the home controller to the basket index page and checks if user is admin
-    public function basketIndex(Request $request)
-    {
-        $user = Auth::user();
-        $home = 'home';
-
-        if($user->hasRole('admin'))
-        {
-            $home = 'admin.baskets.index';
-        }
-        else if ($user->hasRole('user'))
-        {
-            $home = 'user.baskets.index';
-        }
-        return redirect()->route($home);
-    }
-
     //bring the home controller to the fishery index page and checks if user is admin
     public function fisheryIndex(Request $request)
     {
@@ -69,4 +52,55 @@ class HomeController extends Controller
         }
         return redirect()->route($home);
     }
+
+      //bring the home controller to the basket index page and checks if user is admin
+      public function anglerIndex(Request $request)
+      {
+          $user = Auth::user();
+          $home = 'home';
+
+          if($user->hasRole('admin'))
+          {
+              $home = 'admin.anglers.index';
+          }
+          else if ($user->hasRole('user'))
+          {
+              $home = 'user.anglers.index';
+          }
+          return redirect()->route($home);
+      }
+
+        //bring the home controller to the basket index page and checks if user is admin
+    public function basketIndex(Request $request)
+    {
+        $user = Auth::user();
+        $home = 'home';
+
+        if($user->hasRole('admin'))
+        {
+            $home = 'admin.baskets.index';
+        }
+        else if ($user->hasRole('user'))
+        {
+            $home = 'user.baskets.index';
+        }
+        return redirect()->route($home);
+    }
+
+      //bring the home controller to the basket index page and checks if user is admin
+      public function accountIndex(Request $request)
+      {
+          $user = Auth::user();
+          $home = 'home';
+
+          if($user->hasRole('admin'))
+          {
+              $home = 'admin.accounts.index';
+          }
+          else if ($user->hasRole('user'))
+          {
+              $home = 'user.accounts.index';
+          }
+          return redirect()->route($home);
+      }
 }

@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="col">
-                    <x-nav-link :href="route('home.basket.index')" :active="request()->routeIs('home.basket.index')" class="text-decoration-none">
+                    <x-nav-link :href="route('home.angler.index')" :active="request()->routeIs('home.angler.index')" class="text-decoration-none">
                         <div class="d-none d-xl-block">
                         <div class="d-flex colours align-items-center">
                         <div class="px-3">
@@ -90,7 +90,7 @@
                             </svg>
                         </div>
 
-                        <h2 class="size2">{{ __('Baskets') }}</h2>
+                        <h2 class="size2">{{ __('Basket') }}</h2>
                         </div>
                         </div>
 
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="col">
-                    <x-nav-link :href="route('home.basket.index')" :active="request()->routeIs('home.basket.index')" class="text-decoration-none">
+                    <x-nav-link :href="route('home.account.index')" :active="request()->routeIs('home.account.index')" class="text-decoration-none">
                     <div class="d-none d-xl-block">
                     <div class="d-flex colours align-items-center">
                     <div class="px-3">
