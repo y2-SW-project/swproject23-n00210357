@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
-            $table->decimal('cost');
+            $table->foreignId('fish_id')->constrained();
             $table->timestamps();
         });
     }

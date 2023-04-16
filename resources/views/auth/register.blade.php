@@ -9,6 +9,15 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <!-- Photo -->
+            <div>
+                <x-input-label for="photo" :value="__('Photo')" />
+
+                <x-text-input id="photo" class="block mt-1 w-full" type="text" name="photo" :value="old('photo')" required autofocus />
+
+                <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+            </div>
+
             <!-- Name -->
             <div>
                 <x-input-label for="name" :value="__('Name')" />

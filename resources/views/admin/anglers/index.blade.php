@@ -27,7 +27,7 @@
                 <div class="col-lg-4"></div>
 
                 <div class="col-lg-3">
-                    <x-nav-link :href="route('home.angler.index')" :active="request()->routeIs('home.angler.index')" class="text-decoration-none">
+                    <x-nav-link :href="route('home.fishery.index')" :active="request()->routeIs('home.fishery.index')" class="text-decoration-none">
                         <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
                             <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Fisheries</h2>
                         </button>
@@ -39,7 +39,6 @@
 
             <div class="row">
                 @forelse ($anglers as $angler)
-
                 <div class="col-sm-12 col-lg-4">
                     <div class="border border-4 card m-5 p-0" style="width: 390px">
 
@@ -48,13 +47,6 @@
                         </a>
 
                         <div class="noWrap">
-
-                            <?php
-                        //    <h5 class="size5">
-                        //         Caught by <span class="size6">{{$angler->user->name}}</span>
-                        //    </h5>
-                            ?>
-
                             <h1>
                                 {{$angler->name}}
                             </h1>
@@ -65,7 +57,6 @@
                         </div>
                     </div>
                 </div>
-
                 @empty
                 <p>Their are no angler right know</p>
                 @endforelse

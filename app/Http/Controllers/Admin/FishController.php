@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\fishery;
 use App\Models\fish;
+use App\Models\basket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -214,4 +215,26 @@ public function store(Request $request)
         //returns the user to index page and plays the success message Fish deleted
         return to_route('admin.fishs.index')->with('success', 'Fish deleted');
     }
+
+      /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+     //when called sends the user to the fishs create page
+     public function add(Fish $fish)
+     {
+         $user = Auth::user();
+         $user->authorizeRoles('admin');
+
+         basket::create([
+            'uuid' => Str::uuid(),
+            'user_id' => Auth::id(),
+            'fish_id' => 9
+        ]);
+ 
+         //returns the user to index page and plays the success message Fish deleted
+         return to_route('admin.fishs.index')->with('success', 'Fish deleted');
+     }
 }

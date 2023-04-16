@@ -18,12 +18,6 @@ class BasketSeeder extends Seeder
      //when this is run it attempts to use factory to input 10 filler baskets into the basket table of the database
     public function run()
     {
-        Basket::factory()->times(3)->create();
-
-        foreach(fish::all() as $fish)
-        {
-            $baskets = basket::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $fish->basket()->attach($baskets);
-        }
+        Basket::factory()->times(2)->create();
     }
 }

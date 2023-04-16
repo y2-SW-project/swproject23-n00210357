@@ -2,76 +2,76 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <div class="header row">
-                <div class="col-sm-0 col-lg-5"></div>
-                <h1 class="size1 col-lg-2">
-                    Fish Store
-                </h1>
-                <div class="col-sm-0 col-lg-5"></div>
-
-                <div class="col-sm-0 col-lg-4"></div>
-                <h4 class="size4 col-lg-4">
-                    Purchase fish based on location or by angler
-                </h4>
-                <div class="col-sm-0 col-lg-4"></div>
-
-                <div class="col-lg-1"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-lg-5">Fish</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
-                <div class="col-lg-4"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.fishery.index')" :active="request()->routeIs('home.fishery.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Fisheries</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
-                <div class="col-lg-1"></div>
-            </div>
-            
             <x-alert-success>
                 {{session('success')}}
             </x-alert-success>
 
-            <a href="{{ route('admin.baskets.create') }}" class="btn-link btn-lg mb-2">+ New Basket</a>
-            @forelse ($baskets as $basket)
-                <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
-                    <div>
-                    <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/images/basket/' . $basket->picture)}}" width="200"/>
-                    </p>
+            <table>
+                <tbody>
+                    <div class="text-center">
+                        <h1>
+                            Basket of {{$user->name}}
+                        </h1>
                     </div>
 
-                    <div>
-                    <h2>
-                        <a href="{{ route('admin.baskets.show', $basket) }}"> {{$basket->location}}</a>
-                    </h2>
+                <div class="row align-items-center">
 
-                    <p class="mt-2">
-                        {{Str::limit($basket->station_master), 200}}
-                     </p>
+                @forelse ($fishs as $fish)
+                @forelse ($baskets as $basket)
+                    @if($user->id == $basket->user_id && $fish->id == $basket->fish_id)
+                    <div class="col-sm-12 col-lg-4">
+                    <div class="border border-4 card m-5 p-0" style="width: 390px">
+                    <div class="row">
+                        <div class="col-4">
+                        <a href="{{ route('admin.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
+                            <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="150" height="150"/>
+                        </a>
+                        </div>
 
-                     <p class="mt-2">
-                        Owned by {{$basket->user->name}}
-                    </p>
+                        <div class="col-1"></div>
+
+                        <div class="noWrap col-6">
+                            <h5 class="size5">
+                                Caught by <span class="size6">{{$fish->user->name}}</span>
+                            </h5>
+
+                            <h1>
+                                {{$fish->fishType}}
+                            </h1>
+
+                            <h4 class="size4">
+                                Caught at <span>{{$fish->fishery->location}} </span>
+                            </h4>
+
+                            <h5 class="size5">
+                                Price €<span class="size6">{{$fish->price}}</span>
+                            </h5>
+
+                        </div>
                     </div>
-
-                    <span class="block mt-4 text-sm opacity-70"> {{$basket->updated_at->diffForHumans()}}</span>
+                    </div>
+                    @endif
                 </div>
+                
                 @empty
-                <p>You have no baskets</p>
+                <p>Their are no fish in the basket</p>
                 @endforelse
-                {{$baskets->links()}}
+
+                @empty
+                <p>Their are no fish in the basket</p>
+                @endforelse
+
+                <div class="row">
+                    <div class="col-10"></div>
+
+                    <div class="col-2">
+                    {{$fishs->links()}}
+                    </div>
+                </div>
+
             </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 </x-app-layout>

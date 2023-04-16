@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
         $role_user = Role::where('name', 'user')->first();
 
         $admin = new User();
+        $admin->photo = 'U1.jpg';
         $admin->name = 'Tim';
         $admin->email = 'Tim@Tim.com';
         $admin->password = Hash::make('password');
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
 
 
         $admin = new User();
+        $admin->photo = 'U2.jpg';
         $admin->name = 'Bob';
         $admin->email = 'Bob@Bob.com';
         $admin->password = Hash::make('password');

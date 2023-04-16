@@ -21,7 +21,7 @@ class BasketFactory extends Factory
         return [
             'uuid' => Str::uuid(),
             'user_id' => $this->faker->randomElement([1, 2]),
-            'cost' => $this->faker->randomFloat(2, 0, 500),
+            'fish_id' => $this->faker->randomElement([1, 2]),
         ];
     }
 }

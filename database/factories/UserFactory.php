@@ -20,6 +20,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'photo' => $this->faker->randomElement(['U1.jpg', 'U2.jpg', 'U3.jpg']),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

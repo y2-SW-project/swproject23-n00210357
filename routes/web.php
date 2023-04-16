@@ -42,6 +42,7 @@ Route::get('/home/fisheries', [App\Http\Controllers\HomeController::class, 'fish
 Route::get('/home/anglers', [App\Http\Controllers\HomeController::class, 'anglerIndex'])->name('home.angler.index');
 Route::get('/home/baskets', [App\Http\Controllers\HomeController::class, 'basketIndex'])->name('home.basket.index');
 Route::get('/home/accounts', [App\Http\Controllers\HomeController::class, 'accountIndex'])->name('home.account.index');
+Route::patch('/admin/fishs', [App\Http\Controllers\Admin\FishController::class, 'add'])->middleware(['auth'])->name('admin.fishs.add');
 
 //moves the user to with help of the fish controller through the website if they are and admin
 Route::resource('/admin/fishs', AdminFishController::class)->middleware(['auth'])->names('admin.fishs');
