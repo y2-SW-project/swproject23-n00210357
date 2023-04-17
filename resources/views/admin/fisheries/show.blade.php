@@ -37,7 +37,7 @@
                             The {{$fishery->location}} Fishery
                         </h2>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <div>
                                 <img src="{{asset('storage/images/fisheries/' . $fishery->photo)}}" width="380"/>
                              </div>
@@ -45,7 +45,7 @@
 
                         <div class="col-6">
                             <p>
-                                Its dock is {{$fishery->dock}}
+                                Its dock master is {{$fishery->dock}}
                             </p>
                         </div>
                     </div>
@@ -54,65 +54,38 @@
                         Some of the Fish on sale that have been caught at this fishery.
                     </h3>
 
-                    <div class="text-center align-items-center blackBox">
-                        <div id="carouselExampleIndicators" class="carousel slide">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            </div>
-                            <?php $counter = 0; ?>
-                            <div class="carousel-inner">
-                            @forelse ($fish as $fish)
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                            @if($fish->fishery_id == $fishery->id)
-                                            @if($counter <= 2)
-                                                <?php $counter += 1; ?>
-                                                <div class="col-sm-12 col-lg-4">
-                                                    <div class="border border-4 card m-5 p-0" style="width: 390px">
+                    <div class="text-center align-items-center row">
+                        <?php $tracker = -1?>
+                        @forelse ($fishs as $fish)
+                            <?php $tracker += 1?>
+                            @if($fish->fishery_id == $fishery->id)
+                                @if($tracker <= 5)
+                                    <div class="col-sm-12 col-lg-4">
+                                        <div class="border border-4 card m-5 p-0" style="width: 390px">
+                                            <a href="{{ route('admin.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
+                                                <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="382" height="150"/>
+                                            </a>
 
-                                                        <a href="{{ route('admin.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
-                                                            <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="382" height="150"/>
-                                                        </a>
+                                            <div class="noWrap">
+                                                <h5 class="size5">
+                                                    Caught by <span class="size6">{{$fish->user->name}}</span>
+                                                </h5>
 
-                                                        <div class="noWrap">
-                                                            <h5 class="size5">
-                                                                Caught by <span class="size6">{{$fish->user->name}}</span>
-                                                            </h5>
+                                                <h1>
+                                                    {{$fish->fishType}}
+                                                </h1>
 
-                                                            <h1>
-                                                                {{$fish->fishType}}
-                                                            </h1>
-
-                                                            <h4 class="size4">
-                                                                Caught at <span>{{$fish->fishery->location}} </span>
-                                                            </h4>
-
-                                                            <h5 class="size5">
-                                                                Price €<span class="size6">{{$fish->price}}</span>
-                                                            </h5>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @endif
+                                                <h5 class="size5">
+                                                    Price €<span class="size6">{{$fish->price}}</span>
+                                                </h5>
+                                            </div>
                                         </div>
-                                    @empty
-                                    <p>Their are no fish in the fishery</p>
                                     </div>
-
-                                @endforelse
-                            </div>
-
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
-                            </button>
-                          </div>
+                                @endif
+                            @endif
+                        @empty
+                        <p>Their are no fish on the market</p>
+                        @endforelse
                     </div>
                 </tbody>
             </table>

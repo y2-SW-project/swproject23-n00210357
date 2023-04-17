@@ -11,7 +11,7 @@
                     <div class="row p-5">
                         <div class="col-6">
                             <div>
-                                <img src="{{asset('storage/images/anglers/' . $user->photo)}}" width="380"/>
+                                <img src="{{asset('storage/images/users/' . $user->photo)}}" width="380"/>
                              </div>
                         </div>
 
@@ -38,7 +38,7 @@
                             @forelse ($fish as $fish)
                                 <div class="carousel-item active">
                                     <div class="row">
-      
+
                                             @if($counter <= 2)
                                                 <?php $counter += 1; ?>
                                                 <div class="col-sm-12 col-lg-4">
@@ -63,7 +63,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                         
+
                                         </div>
                                     @empty
                                     <p>Their are no fish in the fishery</p>

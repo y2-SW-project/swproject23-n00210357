@@ -1,3 +1,4 @@
+<footer class="">
 <div class="row blackBox">
     <div class="col-sm-5 col-lg-4">
         <h1 class="size1">
@@ -104,3 +105,4 @@
         </svg>
     </div>
 </nav>
+</footer>

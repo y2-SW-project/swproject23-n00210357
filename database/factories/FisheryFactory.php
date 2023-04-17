@@ -20,7 +20,7 @@ class FisheryFactory extends Factory
             //sets what is to be filled with data when seeder is called
         return [
             'uuid' => Str::uuid(),
-            'location' => $this->faker->name(),
+            'location' => $this->faker->randomElement(['Kilmore quay', 'Inland Fisheries Ireland', 'The Salmon Summit']),
             'dock' => $this->faker->name(),
             'photo' => $this->faker->randomElement(['P1.jpg', 'P2.jpg', 'P3.jpg']),
         ];

@@ -43,7 +43,7 @@
                     <div class="border border-4 card m-5 p-0" style="width: 390px">
 
                         <a href="{{ route('admin.anglers.show', $angler) }}" class="whitespace-pre-wrap text-center p-0 m-0">
-                            <img src="{{asset('storage/images/user/' . $angler->shot)}}" width="382" height="150"/>
+                            <img src="{{asset('storage/images/users/' . $angler->photo)}}" width="382" height="150"/>
                         </a>
 
                         <div class="noWrap">

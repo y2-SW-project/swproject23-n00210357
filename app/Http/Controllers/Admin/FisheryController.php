@@ -105,8 +105,8 @@ public function store(Request $request)
          //checks that the fisheries are the property of the user otheir wise it calls a 403 error
 
          //opens up the show page for the user
-         $fish = fish::all();
-         return view('admin.fisheries.show')->with('fishery', $fishery)->with('fish', $fish);
+         $fishs = fish::all();
+         return view('admin.fisheries.show')->with('fishery', $fishery)->with('fishs', $fishs);
      }
 
     /**
@@ -154,12 +154,12 @@ public function store(Request $request)
     $path = $photo->storeAs('public/images/fisheries', $filename);
 
     //uses the new data to create a new train in the train table
-        Fishery::update([
-            'uuid' => Str::uuid(),
-            'location' => $request->location,
-            'dock' => $request->dock,
-            'photo' => $filename,
-        ]);
+
+    $fishery->update([
+        'location' => $request->location,
+        'dock' => $request->dock,
+        'photo' => $filename,
+    ]);
 
         //returns the user to show page and plays the success message Fishery updated
         return to_route('admin.fisheries.show', $fishery)->with('success', 'Fishery updated');

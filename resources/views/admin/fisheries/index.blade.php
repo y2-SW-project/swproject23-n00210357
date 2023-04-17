@@ -2,39 +2,20 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="header row">
-                <div class="col-sm-0 col-lg-5"></div>
-                <h1 class="size1 col-lg-2">
-                    Fish Store
+                <div class="col-sm-0 col-lg-1"></div>
+                <h1 class="size1 col-lg-4">
+                    Fisheries that are currently in use Store
                 </h1>
-                <div class="col-sm-0 col-lg-5"></div>
 
-                <div class="col-sm-0 col-lg-4"></div>
-                <h4 class="size4 col-lg-4">
-                    Purchase fish based on by angler or look look at the resent fish
-                </h4>
-                <div class="col-sm-0 col-lg-4"></div>
-
-                <div class="col-lg-1"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-decoration-none">
+                <div class="col-sm-0 col-lg-2"></div>
+                <div class="col-sm-10 col-lg-4 text-center">
+                    <x-nav-link :href="route('admin.fisheries.create')" :active="request()->routeIs('admin.fisheries.create')" class="text-decoration-none">
                         <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-lg-5">Fish</h2>
+                            <h2 class="size2 px-xs-2 px-lg-5">Add fishery as a fishing spot</h2>
                         </button>
                     </x-nav-link>
                 </div>
-
-                <div class="col-lg-4"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.angler.index')" :active="request()->routeIs('home.angler.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Anglers</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
-                <div class="col-lg-1"></div>
+                <div class="col-sm-0 col-lg-1"></div>
             </div>
 
             <x-alert-success>
@@ -42,16 +23,6 @@
             </x-alert-success>
 
             <div class="row align-items-center">
-                <div class="col-sm-1 col-lg-4"></div>
-                    <div class="col-sm-10 col-lg-4 text-center">
-                        <x-nav-link :href="route('admin.fisheries.create')" :active="request()->routeIs('admin.fisheries.create')" class="text-decoration-none">
-                            <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                                <h2 class="size2 px-xs-2 px-lg-5">Add fishery as a fishing spot</h2>
-                            </button>
-                        </x-nav-link>
-                    </div>
-                <div class="col-sm-1 col-lg-4"></div>
-
                 @forelse ($fisheries as $fishery)
                 <div class="col-sm-12 col-lg-4">
                     <div class="border border-4 card m-5 p-0" style="width: 390px">
@@ -77,7 +48,7 @@
                             </h4>
 
                             <h5 class="size5">
-                                Docks name is <span class="size6">{{$fishery->dock}}</span>
+                                Dock master <span class="size6">{{$fishery->dock}}</span>
                             </h5>
 
                         </div>
