@@ -1,77 +1,72 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class="header row">
-                <div class="col-sm-0 col-lg-5"></div>
-                <h1 class="size1 col-lg-2">
-                    Fish Store
+                <div class="col-sm-0 col-lg-1"></div>
+                <!-- header -->
+                <h1 class="size1 col-lg-4">
+                    Fisheries that are currently in use Store
                 </h1>
-                <div class="col-sm-0 col-lg-5"></div>
 
-                <div class="col-sm-0 col-lg-4"></div>
-                <h4 class="size4 col-lg-4">
-                    Search for fish by directly looking fish or by looking at anglers
-                </h4>
-                <div class="col-sm-0 col-lg-4"></div>
-
-                <div class="col-lg-1"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-lg-5">Fish</h2>
-                        </button>
-                    </x-nav-link>
+                <div class="col-sm-0 col-lg-2"></div>
+                <div class="col-sm-10 col-lg-4 text-center">
                 </div>
-
-                <div class="col-lg-4"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.basket.index')" :active="request()->routeIs('home.basket.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Anglers</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
-                <div class="col-lg-1"></div>
+                <div class="col-sm-0 col-lg-1"></div>
             </div>
 
+            <!-- displays on creating a new fishery -->
             <x-alert-success>
                 {{session('success')}}
             </x-alert-success>
 
+            <div class="row align-items-center">
                 @forelse ($fisheries as $fishery)
-                <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
-                    <div>
-                    <p class="whitespace-pre-wrap">
-                        <img src="{{asset('storage/images/fishery/' . $fishery->photo)}}" width="200"/>
-                    </p>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="border border-4 card m-5 p-0" style="width: 390px">
+                        
+                        <!-- displays fisheries photo and functions as the link to its show page -->
+                        <a href="{{ route('user.fisheries.show', $fishery) }}" class="whitespace-pre-wrap text-center p-0 m-0">
+                            <img src="{{asset('storage/images/fisheries/' . $fishery->photo)}}" width="382" height="150"/>
+                        </a>
+
+                        <div class="noWrap">
+
+                            <?php
+                        //    <h5 class="size5">
+                        //         Caught by <span class="size6">{{$fishery->user->name}}</span>
+                        //    </h5>
+                            ?>
+
+                            <h1>
+                                {{$fishery->fishType}}
+                            </h1>
+
+                            <!-- displays the locations -->
+                            <h4 class="size4">
+                                <span>{{$fishery->location}} </span> fishery
+                            </h4>
+
+                            <!-- displays the dockmasters -->
+                            <h5 class="size5">
+                                Dock master <span class="size6">{{$fishery->dock}}</span>
+                            </h5>
+
+                        </div>
                     </div>
-
-                    <div>
-                    <h2>
-                        <a href="{{ route('user.fisheries.show', $fishery) }}"> {{$fishery->first_name}}</a>
-                    </h2>
-
-                    <p class="mt-2">
-                        {{Str::limit($fishery->certification), 200}}
-                    </p>
-
-                    <p class="mt-2">
-                        Owned by {{$fishery->user->name}}
-                    </p>
-
-                    </div>
-
-                    <span class="block mt-4 text-sm opacity-70"> {{$fishery->updated_at->diffForHumans()}}</span>
                 </div>
                 @empty
-                <p>You have no fisheries</p>
+                <p>Their are no fishery on the market</p>
                 @endforelse
-                {{$fisheries->links()}}
+
+                <div class="row">
+                    <div class="col-10"></div>
+
+                    <div class="col-2">
+                    {{$fisheries->links()}}
+                    </div>
+                </div>
+
             </div>
         </div>
+    </div>
 </x-app-layout>

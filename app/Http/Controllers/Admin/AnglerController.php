@@ -50,6 +50,7 @@ class AnglerController extends Controller
 
         //opens up the show page for the user
         $fish = fish::all();
-        return view('admin.anglers.show')->with('angler', $angler)->with('fish', $fish);
+        $role = Role::all();
+        return view('admin.anglers.show')->with('angler', $angler)->with('fish', $fish)->with('role', $role);
     }
 }

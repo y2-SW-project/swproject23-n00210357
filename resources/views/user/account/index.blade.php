@@ -10,21 +10,18 @@
                 <tbody>
                     <div class="row p-5">
                         <div class="col-6">
-
-                        <!-- image -->
                             <div>
-                                <img src="{{asset('storage/images/users/' . $angler->photo)}}" width="380"/>
+                                <img src="{{asset('storage/images/users/' . $user->photo)}}" width="380"/>
                              </div>
                         </div>
 
-                        <!-- desplays angler details -->
                         <div class="col-6">
                             <h2>
-                                {{$angler->name}}
+                                {{$user->name}}
                             </h2>
 
                             <p>
-                                {{$angler->email}}
+                                {{$user->email}}
                             </p>
                         </div>
                     </div>
@@ -67,7 +64,7 @@
                             @forelse ($fish as $fish)
 
                                 <!-- sorts fish to only fish that bleongs to this fishery -->
-                                @if($fish->user_id == $angler->id)
+                                @if($fish->user_id == $user->id)
 
                                     <!-- increases tracker -->
                                     <?php $tracker += 1?>
@@ -78,7 +75,7 @@
                                         <div class="col-sm-10 col-lg-3">
                                             <div class="border border-4 card m-5 ms-0 p-0" style="width: 360px">
                                                 <!-- links to the indvidual fishes page -->
-                                                <a href="{{ route('admin.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
+                                                <a href="{{ route('user.fishs.show', $fish) }}" class="whitespace-pre-wrap text-center p-0 m-0">
                                                     <img src="{{asset('storage/images/fish/' . $fish->image)}}" width="352" height="150"/>
                                                 </a>
 
@@ -118,7 +115,6 @@
         </div>
     </div>
 </x-app-layout>
-
 
 <!-- runs the javascript -->
 <script type="text/javascript">

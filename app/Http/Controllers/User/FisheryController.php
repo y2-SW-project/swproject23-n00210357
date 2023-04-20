@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\basket;
 use App\Models\fishery;
 use App\Models\fish;
 use Illuminate\Http\Request;
@@ -24,7 +23,6 @@ class FisheryController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('user');
-
         $fisheries = fishery::with('user')->get();
         $fisheries = fishery::all();
         //authenticates the fisheries to their latest update in pages of 5
@@ -37,27 +35,17 @@ class FisheryController extends Controller
         return view('user.fisheries.index')->with('fisheries', $fisheries);
     }
 
-    /**
-      * Display the specified resource.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
-
-      // brings the user to their show page when called
-      public function show(Fishery $fishery)
+     // brings the user to their show page when called
+     public function show(Fishery $fishery)
      {
-        $user = Auth::user();
-        $user->authorizeRoles('user');
+         $user = Auth::user();
+         $user->authorizeRoles('user');
 
-        $fisheries = fishery::with('fishin')->get();
-        //checks that the fisheries are the property of the user otheir wise it calls a 403 error
-        if ($fishery->user_id != Auth::id())
-        {
-            return abort(403);
-        }
-        $fishins = fishin::with('basket')->with('fishery')->get();
-        //opens up the show page for the user
-        return view('user.fisheries.show')->with('fishery', $fishery);
-    }
+         $fisheries = fishery::get();
+         //checks that the fisheries are the property of the user otheir wise it calls a 403 error
+
+         //opens up the show page for the user
+         $fishs = fish::all();
+         return view('user.fisheries.show')->with('fishery', $fishery)->with('fishs', $fishs);
+     }
 }
