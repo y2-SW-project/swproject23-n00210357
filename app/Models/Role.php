@@ -15,6 +15,6 @@ class Role extends Model
     //links user and role together as each otheirs foreign keys
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'user_role');
+        return $this->belongsToMany('App\Models\User', 'user_roles');
     }
 }

@@ -234,7 +234,7 @@ public function store(Request $request)
             'fish_id' => 9
         ]);
  
-         //returns the user to index page and plays the success message Fish deleted
-         return to_route('admin.fishs.index')->with('success', 'Fish deleted');
+         //returns the user to add page and plays the success message Fish deleted
+         return to_route('admin.fish.index')->with('success', 'Fish deleted');
      }
 }

@@ -16,24 +16,6 @@
 
                 <div class="col-lg-1"></div>
 
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.fishery.index')" :active="request()->routeIs('home.fishery.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-lg-5">Fisheries</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
-                <div class="col-lg-4"></div>
-
-                <div class="col-lg-3">
-                    <x-nav-link :href="route('home.angler.index')" :active="request()->routeIs('home.angler.index')" class="text-decoration-none">
-                        <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
-                            <h2 class="size2 px-xs-2 px-sm-2 px-lg-5">Anglers</h2>
-                        </button>
-                    </x-nav-link>
-                </div>
-
                 <div class="col-lg-1"></div>
             </div>
 

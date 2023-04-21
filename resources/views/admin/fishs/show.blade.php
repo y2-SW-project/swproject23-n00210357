@@ -68,13 +68,11 @@
                                 Its dock is {{$fish->fishery->dock}}
                             </p>
 
-                            <form action="{{ route('admin.fishs.add', $fish) }}" method="patch" class="col-3 py-1">
-                                @method('patch')
-                                @csrf
-                                <button class="dropbtn colours-bg border-radius" onclick="return confirm('Are you sure')">
-                                    <h4 class="size4">add fish to basket</h4>
-                                </button>
-                            </form>
+                            <x-nav-link :href="route('admin.fishs.index')" :active="request()->routeIs('admin.fishs.index')" class="text-decoration-none">
+                            <button class="dropbtn colours-bg border-radius my-2 px-xs-2 px-sm-2 px-lg-5">
+                                <h2 class="size2 px-xs-2 px-lg-5">Add fish to basket</h2>
+                            </button>
+                        </x-nav-link>
                         </div>
                     </div>
                 </tbody>

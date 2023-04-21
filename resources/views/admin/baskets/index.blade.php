@@ -50,8 +50,8 @@
                         </div>
                     </div>
                     </div>
+                    </div>
                     @endif
-                </div>
                 
                 @empty
                 <p>Their are no fish in the basket</p>

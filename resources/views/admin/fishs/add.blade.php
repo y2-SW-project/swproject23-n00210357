@@ -14,20 +14,6 @@
                 <h4 class="size-4 ml-8 col-3">
                     <strong>Updated at: </strong> {{$fish->updated_at->diffForHumans()}}
                 </h3>
-
-                <x-nav-link :href="route('admin.fishs.edit', $fish)" :active="request()->routeIs('admin.fishs.edit', $fish)" class="text-decoration-none col-3">
-                    <button class="dropbtn colours-bg border-radius">
-                        <h4 class="size4">Edit Fish</h4>
-                    </button>
-                </x-nav-link>
-
-                <form action="{{ route('admin.fishs.destroy', $fish) }}" method="post" class="col-3 py-1">
-                    @method('delete')
-                    @csrf
-                    <button class="dropbtn colours-bg border-radius" onclick="return confirm('Are you sure')">
-                        <h4 class="size4">Delete Fish</h4>
-                    </button>
-                </form>
             </div>
 
             <table>
